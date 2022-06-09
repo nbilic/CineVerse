@@ -1,0 +1,47 @@
+.friends-display{
+    background-color: white;
+    padding: 15px;
+    width: 100%;
+    height: fit-content;
+    min-height: 300px;
+    margin: 3%;
+    border:1px solid rgb(226, 226, 226);
+    font-size: 1.05em;
+    color:#575B5F;
+
+    border-radius: 3%;
+}
+
+.friends-display ul{
+   
+}
+
+.friends-display ul li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.friend-avatar{
+    height: 48px;
+    width: 48px;
+    border-radius: 10px;
+    margin: 10px;
+    object-fit: cover;
+}
+
+.friends-display > input{
+    height: 32px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.friend-handle{
+    font-size: .8em;
+}
+
+.name-handle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

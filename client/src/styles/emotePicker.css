@@ -1,0 +1,47 @@
+.modal{
+    position: absolute;
+    z-index: 10;
+    border:none;
+    
+}
+
+
+.bottom{
+    top:50px;
+    right: 0;
+}
+
+.top{
+    bottom:30px;
+    right:0px;
+}
+
+.emoji-holder{
+    display: flex;
+    max-width: 200px;
+    max-height: 200px;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #F1F1F1;
+    border:1px solid gray;
+    justify-content: center;
+}
+
+.emoji{
+    margin: 2px 8px;
+    width: 12%;
+    font-size: 1.3em;
+}
+
+.emoji:hover{
+    cursor: pointer;
+}
+.filter-emojis input{
+    width: 100%;
+
+}
+
+.filter-emojis input:focus{
+    outline:none
+}

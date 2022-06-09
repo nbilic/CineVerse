@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,500,700,800');
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", "Segoe Ui";
+    position: relative;
+}
+/* 
+html{
+
+    overflow-y: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
+} */

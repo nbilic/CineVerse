@@ -1,0 +1,32 @@
+.user-display-card{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    margin: 3%;
+    border-radius: 3%;
+    border:1px solid rgb(226, 226, 226);
+}
+
+.user-display-card .user-avatar{
+    height: 50px;
+    width:50px;
+}
+
+.user-details{
+    margin-left: 10px;
+ 
+}
+
+.user-name{
+    font-size: 1.1em;
+    margin-bottom: 2px;
+}
+
+.user-handle{
+    font-size: 0.8em;
+}
+
+.user-avatar:hover,.user-name:hover,.user-handle:hover{
+    cursor: pointer;
+}

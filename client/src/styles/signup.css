@@ -1,0 +1,116 @@
+.signup-body{
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgb(30, 169, 204);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.signup-card{
+    width: 800px;
+    min-height: 500px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    border:0px solid white;
+    margin-right: -10px;
+    background-color: rgb(255, 255, 255);
+    border:0px solid red;
+}
+
+.left-side-card{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    min-height: 500px;
+    height: 100%;
+    border:0px solid red;
+    background: url('https://i.pinimg.com/originals/d8/6a/e5/d86ae5d9960b9d131ab64353f237fa79.jpg') ;
+    background-size: cover;
+
+}
+
+.line{
+    border: 1px solid rgb(235, 94, 0);
+    min-height: 500px;
+    height: 100%;
+ 
+}
+.left-side-card > .logo{
+    max-height: 200px;
+}
+
+.right-side-card{
+    width: 50%;
+    height: 100%;
+    margin-left: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.right-side-card > form > input{
+    padding: 5px;
+    width: 90%;
+}
+
+.h1{
+    background-color: #000000;
+    color:white;
+    font-size: 3.5em;
+    padding: 10px;
+    border:1px solid white;
+    width: 80%;
+    text-align: center;
+}
+
+.login-text{
+    color:rgb(235, 94, 0)
+}
+
+
+.login-text,.login-subtext{
+    margin: 2% 0%;
+}
+.login-subtext{
+    font-size: 0.8em;
+    display: flex;
+}
+
+.right-side-card > form > button {
+    width: 70px; 
+    height: 40px;
+    align-self: center;
+    background-color: rgb(8, 141, 205);
+    color:white;
+    border: none;
+    margin: 10px;
+
+}
+
+.redirect{
+    margin-left: 5px;
+    color:rgba(233, 156, 13, 0.959);
+    font-weight: bold;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.redirect{
+    margin-left: 5px;
+    color:rgba(233, 156, 13, 0.959);
+    font-weight: bold;
+}
+
+.redirect:hover{
+    cursor: pointer;
+}

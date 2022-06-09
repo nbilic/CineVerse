@@ -1,0 +1,127 @@
+.register-text{
+    color:rgb(235, 94, 0)
+}
+
+
+.register-text,.register-subtext{
+    margin: 2% 0%;
+}
+.register-subtext{
+    font-size: 0.8em;
+    display: flex;
+}
+
+.register-container > form > button {
+    width: 70px; 
+    height: 40px;
+    align-self: center;
+    background-color: rgb(8, 141, 205);
+    color:rgb(255, 255, 255);
+    border: none;
+    margin: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: .8em;
+}
+
+
+/* input stuff odavde */
+
+
+/* .register-container > form > label > input{
+    padding: 5px;
+    width: 100%;
+    margin: 5px 0px;
+}
+
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.full-name,.handle-dob{
+    display: flex;
+    border:0px solid red;
+}
+
+
+.handle-dob{
+    align-items: center;
+}
+
+.handle-dob > label{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.handle-dob > label:nth-child(2){
+    margin-left: 10px;
+    width: 100%;
+    border:0px solid red;  
+}
+
+.handle-dob > label:nth-child(2) > input{
+    width: 100%;
+
+}
+.full-name-input,.handle-dob-input{
+   
+  
+}
+
+ */
+
+ .register-form{
+     display: flex;
+     flex-direction: column;
+     border:0px solid red
+ }
+
+ .two-inputs{
+     display: flex;
+     border:0px solid red;
+     justify-content: space-between;
+ }
+
+ .two-inputs > label {
+     width: 48%;
+ }
+ .two-inputs > label > input{
+    width: 100%;
+ }
+.register-form > label {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-container  input{
+    padding: 8px 4px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border:1px solid rgb(192, 192, 192);
+}
+
+.register-container input:focus{
+    outline:2px solid rgb(230, 140, 7)
+}
+
+/* .last-name-input,.first-name-input{
+    color:red;
+    width: 95%;
+    display: flex;
+}
+
+.register-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
+} */
+
+.register-container button:hover{
+    cursor: pointer;
+}

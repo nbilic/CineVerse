@@ -1,0 +1,87 @@
+:root {
+    --profile-avatar-height: 120px;
+    --profile-avatar-width:120px;
+  }
+  
+
+.profile-display-container{
+    background-color: white;
+    margin-top: 4%;
+    color:#3f4244
+    
+}
+
+.upper-container{
+    height: 250px;
+    overflow: hidden;
+    background-color: #3f4244;
+}
+
+.banner{
+   width: 100%;
+   height: 100%;
+    object-fit: cover;
+}
+
+.bottom-container{
+    /* background-color: #f1f1f1; */
+    border:1px solid white;
+    padding:0px 30px;
+}
+
+.profile-avatar{
+    height: var(--profile-avatar-height);
+    width: var(--profile-avatar-width);
+    margin-top: calc(var(--profile-avatar-width)/2 * -1);
+    border:2px solid rgb(226, 226, 226);
+    border-radius: 10px;
+    /* margin-left: 30px; */
+
+}
+.bottom-container{
+   /*  margin-left: 20px; */
+}
+
+.profile-name{
+    text-transform: uppercase;
+
+    font-size: 1.05em;
+    color:#3f4244
+}
+.profile-handle{
+    color:#494e50;
+    font-size: 0.9em;
+}
+
+.profile-bio{
+    margin: 1% 0%;
+    padding-bottom: 2%;
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+.profile-personal-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 2% 0%;
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+.profile-personal-info > div {
+    display: flex;
+    align-items: center;
+}
+
+.profile-personal-info > div > p{
+    margin-left: 5px;
+}
+.profile-stats{
+    display: flex;
+}
+
+.stat{
+    margin:2%;
+    margin-left: 0%;
+}
+.friends-incommon{
+    margin: 2% 0%;
+}

@@ -1,0 +1,22 @@
+.post-options-card{
+    width: fit-content;
+    height: fit-content;
+    border:1px solid rgb(226, 226, 226);;
+    padding: 10px;
+    right: 0;
+}
+
+.post-options-card .option{
+    display: flex;
+    margin: 2px;
+    align-items: center;
+}
+
+.option-icon{
+    margin-right: 10px;
+}
+
+.post-options-card .option:hover{
+    color:rgb(68, 126, 145);
+    cursor: pointer;
+}

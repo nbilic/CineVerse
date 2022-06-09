@@ -1,0 +1,71 @@
+.user-img-comment{
+    height: 36px;
+    width: 36px;
+    object-fit: cover;
+}
+
+.reply-box{
+    display: flex;
+    margin-left: 5%;
+    padding: 5px;
+    margin: 5px 10px ;
+
+  
+}
+.reply-upper{
+    display: flex;
+    align-items: center;
+}
+.reply-username{
+    margin-right: 10px;
+    color:rgb(68, 126, 145);
+}
+
+.reply-content-container{
+    border:0px solid rgb(206, 206, 206);
+    padding: 5px;
+    width: 90%;
+    font-size: 0.9em;
+    position: relative;
+    border-radius: 4px;
+    padding-left: 10px;
+    background-color: #F1F1F1;
+    overflow-wrap: break-word;
+}
+
+.triangle{
+    width: 0; 
+    height: 0; 
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent; 
+    border-right:12px solid #F1F1F1;
+    top: 13px;
+    left: -12px;
+    position: absolute;
+
+}
+.inner-triangle{
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent; 
+    border-right:10px solid #F1F1F1;
+    top: 15px;
+    left: -10px;
+    position: absolute;
+}
+
+.reply-content{
+    margin-top: 10px;
+}
+
+.reply-delete-icon{
+    position: absolute;
+    right: 10px;
+    font-size: 1.1em;
+}
+
+.reply-delete-icon:hover{
+    color:crimson;
+    cursor: pointer;
+}

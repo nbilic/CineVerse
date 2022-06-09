@@ -1,0 +1,13 @@
+.label-info{
+    display: flex;
+    align-items: center;
+}
+
+.hint-icon{
+    margin-left: 5px;
+}
+
+.error{
+    font-size: 0.8em;
+    color:crimson
+}

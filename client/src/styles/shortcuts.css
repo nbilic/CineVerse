@@ -1,0 +1,43 @@
+.shortcuts{
+    background-color: white;
+    padding: 15px;
+    height: fit-content;
+    margin: 3%;
+    border:1px solid rgb(226, 226, 226);
+    font-size: 1.05em;
+    color:#575B5F;
+
+    border-radius: 3%;
+}
+
+.shortcuts > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+   
+}
+
+.shortcuts > ul > li{
+    display: flex;
+    align-items: center;
+}
+
+.shortcuts ul li:hover{
+    cursor: pointer;
+    color:rgb(62, 143, 170)
+}
+
+.shortcut-icons{
+    margin: 10px 10px;
+}
+
+.logout-icon{
+    margin-left: 13px;
+}
+
+.shortcuts h5{
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    font-size: 1.05em;
+    color:#3f4244
+}

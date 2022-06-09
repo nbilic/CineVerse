@@ -1,0 +1,67 @@
+.recent-users{
+    background-color: white;
+    padding: 15px;
+    height: fit-content;
+    margin: 3%;
+    border:1px solid rgb(226, 226, 226);
+    font-size: 1.05em;
+    color:#575B5F;
+    border-radius: 3%;
+}
+
+.user-avatar{
+    height: 48px;
+    width: 48px;
+    min-width: 48px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border:0px solid red;
+    object-fit: cover;
+}
+
+.recent-users ul li{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    width: 100%;
+    font-size: .9em;
+    padding: 5px;
+}
+
+.recent-users-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    border:0px solid red;
+    
+}
+
+.add-friend-button{
+    
+    width: 120px;
+    padding: 8px 10px;
+    background-color: rgb(8, 141, 205);
+    color:rgb(255, 255, 255);
+    border: none;
+    font-size: .7em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 5px;
+
+}
+
+.add-friend-button:hover{
+    cursor: pointer;
+    /* color: crimson; */
+}
+
+.recent-users-upper{
+    display: flex;
+}
+
+.recent-users-handle{
+    font-size: .8em;
+    margin-top: 4px;
+}
