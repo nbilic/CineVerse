@@ -11,9 +11,11 @@ import axios from "axios";
 import apiUrl from "../components/API_URL";
 import RecentUsers from "../components/RecentUsers";
 import UserDisplay from "../components/UserDisplay";
+import { useNavigate } from "react-router-dom";
 const Homepage = () => {
   const { user } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
   const addNewPost = (post) => {
     setPosts([{ user, post }, ...posts]);
   };
@@ -22,6 +24,7 @@ const Homepage = () => {
     const filteredPosts = posts.filter((p) => p.post._id !== post._id);
     setPosts([...filteredPosts]);
   };
+
   useEffect(() => {
     const getPosts = async () => {
       try {
