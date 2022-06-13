@@ -9,7 +9,7 @@ const Signup = () => {
     <div className="signup-body">
       <div className="signup-card">
         <div className="left-side-card">
-          {/* <img src={logo} alt="" className="logo" /> */}
+          {/* <img src={logo} alt="" className="logo" />*/}
           <h1 className="h1">CineVerse</h1>
         </div>
         <div className="line"></div>

@@ -4,14 +4,15 @@ import { BsImage, BsEmojiSmile } from "react-icons/bs";
 import { CgCloseR } from "react-icons/cg";
 import "../styles/createPost.css";
 import EmotePicker from "./EmotePicker";
-import axios from "axios";
 import { useSelector } from "react-redux";
-import apiUrl from "./API_URL";
+import useRouteToProfile from "../hooks/useRouteToProfile";
+import api from "../api/api";
 
 const CreatePost = ({ addNewPost }) => {
   const inputFile = useRef(null);
   const [display, setDisplay] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const routeToProfile = useRouteToProfile(user.handle);
   const [post, setPost] = useState({
     username: `${user.firstName} ${user.lastName}`,
     content: "",
@@ -23,16 +24,12 @@ const CreatePost = ({ addNewPost }) => {
   const commitPost = async () => {
     try {
       if (!checkIfValidPost()) return;
-      const response = await axios.post(
-        `${apiUrl}/api/post/create`,
-        {
-          content: post.content,
-          author: user._id,
-          image: file,
-          publishedAt: new Date(),
-        },
-        { withCredentials: true }
-      );
+      const response = await api.post(`/api/post/create`, {
+        content: post.content,
+        author: user._id,
+        image: file,
+        publishedAt: new Date(),
+      });
 
       addNewPost(response.data);
       setPost({
@@ -45,17 +42,12 @@ const CreatePost = ({ addNewPost }) => {
     }
   };
 
-  /*   const handleChange = (e) => {
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }; */
-
   const toDataURL = (img) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setFile(reader.result);
     };
     reader.readAsDataURL(img);
-    console.log(file);
   };
 
   const removeImage = () => setFile(null);
@@ -63,7 +55,12 @@ const CreatePost = ({ addNewPost }) => {
   return (
     <div className="create-post-div">
       <form className="container">
-        <img src={user.avatar} alt="profile-picture" className="user-img" />
+        <img
+          src={user.avatar}
+          alt="profile"
+          className="user-img"
+          onClick={routeToProfile}
+        />
         <div className="post-box">
           <textarea
             className="post-textarea"
@@ -109,37 +106,12 @@ const CreatePost = ({ addNewPost }) => {
             accept="image/png, image/jpeg"
             hidden
           />
-          {/* {file && (
-          <div className="pending-img">
-            <img src={file} className="submitted-img" />
-            <CgCloseR className="close-icon" onClick={removeImage} />
-          </div>
-        )}
-        <div className="post-menu">
-          <button
-            className="image-upload-button"
-            onClick={() => inputFile.current.click()}
-          >
-            <BsImage className="menu-item" />
-          </button>
-
-          <input
-            type="file"
-            onChange={handleChange}
-            ref={inputFile}
-            accept="image/png, image/jpeg"
-            hidden
-          />
- 
-      
-          </div>
-          */}
         </div>
       </form>
 
       {file && (
         <div className="pending-img">
-          <img src={file} className="submitted-img" />
+          <img src={file} className="submitted-img" alt="submitting" />
           <CgCloseR className="close-icon" onClick={removeImage} />
         </div>
       )}

@@ -1,11 +1,10 @@
 .signup-body{
-    min-height: 100vh;
-    min-width: 100vw;
+    height: 100vh;
+    width: 100%;
     background-color: rgb(30, 169, 204);
     display: flex;
     align-items: center;
     justify-content: center;
-   
 }
 
 .signup-card{

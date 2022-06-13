@@ -2,12 +2,12 @@
     background-color: white;
     padding: 15px;
     height: fit-content;
-    margin: 3%;
+    margin-top: 3%;
     border:1px solid rgb(226, 226, 226);
     font-size: 1.05em;
     color:#575B5F;
-
     border-radius: 3%;
+    border:0px solid red
 }
 
 .shortcuts > ul {

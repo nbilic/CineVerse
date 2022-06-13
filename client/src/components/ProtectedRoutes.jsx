@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/user";
+import Loading from "./Loading";
+import api from "../api/api";
 
 const ProtectedRoutes = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -10,9 +11,7 @@ const ProtectedRoutes = () => {
   const dispatch = useDispatch();
   const relogUser = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/auth/session", {
-        withCredentials: true,
-      });
+      const response = await api.get("/auth/session");
       await dispatch(setUser(response.data));
       setIsAuth(true);
       setLoaded(true);
@@ -26,7 +25,7 @@ const ProtectedRoutes = () => {
   }, []);
 
   return !loaded ? (
-    <h5>Loading...</h5>
+    <Loading />
   ) : isAuth ? (
     <Outlet />
   ) : (

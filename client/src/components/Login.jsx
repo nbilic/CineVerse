@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import FormInput from "./FormInput";
 import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import apiUrl from "./API_URL";
 import { setUser } from "../redux/user";
 import { useDispatch, useSelector } from "react-redux";
+import api from "../api/api";
 const Login = ({ setLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -14,14 +13,13 @@ const Login = ({ setLogin }) => {
     email: "",
     password: "",
   });
-  const [inputs, setInputs] = useState([
+  const [inputs] = useState([
     {
       id: 1,
       name: "email",
       type: "email",
       label: "E-mail",
       placeholder: "Email",
-      label: "Email",
       required: true,
     },
     {
@@ -30,7 +28,6 @@ const Login = ({ setLogin }) => {
       type: "password",
       label: "Password",
       placeholder: "Password",
-      label: "Password",
       required: true,
     },
   ]);
@@ -41,27 +38,20 @@ const Login = ({ setLogin }) => {
 
   const login = async () => {
     try {
-      const response = await axios.post(
-        `${apiUrl}/auth/login`,
-        {
-          password: values.password,
-          email: values.email,
-        },
-        { withCredentials: true }
-      );
+      const response = await api.post(`/auth/login`, {
+        password: values.password,
+        email: values.email,
+      });
 
-      console.log(response.data);
       await dispatch(setUser(response.data.user));
       navigate(`/`);
     } catch (error) {
-      /* notify(error.response.data.message); */
       console.log(error.response);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* navigate(`/`); */
     login();
   };
 

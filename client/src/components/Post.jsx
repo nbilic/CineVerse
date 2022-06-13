@@ -7,20 +7,21 @@ import { useEffect, useState } from "react";
 import Replies from "./Replies";
 import ReactTimeAgo from "react-time-ago";
 import PostOptions from "./PostOptions";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import apiUrl from "../components/API_URL";
-import axios from "axios";
 import ImageModal from "./ImageModal";
 import VotedBy from "./VotedBy";
+import useToggle from "../hooks/useToggle";
+import useRouteToProfile from "../hooks/useRouteToProfile";
+import api from "../api/api";
+
 const Post = ({ post, user: originalPoster, removePost }) => {
-  const navigate = useNavigate();
   const [replies, setReplies] = useState([]);
   const [options, setOptions] = useState(false);
-  const [imgModal, setImgModal] = useState(false);
-  const [votesModal, setVotesModal] = useState(false);
   const [votesModalMode, setVotesModalMode] = useState();
+  const [imageModal, toggleImageModal] = useToggle(false);
+  const [votesModal, toggleVotesModal] = useToggle(false);
   const { user } = useSelector((state) => state.user);
+  const routeToProfile = useRouteToProfile(originalPoster.handle);
   const [postDetails, setPostDetails] = useState({
     likes: post.likes,
     dislikes: post.dislikes,
@@ -41,20 +42,12 @@ const Post = ({ post, user: originalPoster, removePost }) => {
     setReplies(filteredReplies);
   };
 
-  const routeToProfile = (handle) => {
-    navigate(`/profile/${handle}`);
-  };
-
   const ratePost = async (vote) => {
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/post/vote/${post._id}`,
-        {
-          vote,
-          activeUser: user._id,
-        },
-        { withCredentials: true }
-      );
+      const response = await api.put(`/api/post/vote/${post._id}`, {
+        vote,
+        activeUser: user._id,
+      });
 
       setPostDetails(response.data);
     } catch (error) {
@@ -64,7 +57,7 @@ const Post = ({ post, user: originalPoster, removePost }) => {
 
   const deletePost = async () => {
     try {
-      await axios.delete(`${apiUrl}/api/post/${post._id}`, {
+      await api.delete(`/api/post/${post._id}`, {
         withCredentials: true,
       });
       removePost(post);
@@ -74,33 +67,27 @@ const Post = ({ post, user: originalPoster, removePost }) => {
   };
 
   useEffect(() => {
-    /* console.log(post.replies); */
     const getReplies = async () => {
       try {
-        const response = await axios.get(
-          `${apiUrl}/api/post/replies/${post._id}`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await api.get(`/api/post/replies/${post._id}`, {
+          withCredentials: true,
+        });
         setReplies(response.data);
       } catch (error) {
         console.log("error => ", error);
       }
     };
     post.replies.length && getReplies();
-    /* post.replies && setReplies([...post.replies]); */
-  }, []);
+  }, [post._id, post.replies.length]);
   return (
     <div className="post-card">
-      {imgModal && (
+      {imageModal && (
         <ImageModal
-          setDisplay={setImgModal}
-          display={imgModal}
+          setDisplay={toggleImageModal}
+          display={imageModal}
           img={post.image}
         />
       )}
-
       {votesModal && (
         <VotedBy
           vote={votesModalMode}
@@ -109,7 +96,7 @@ const Post = ({ post, user: originalPoster, removePost }) => {
               ? postDetails.likedBy
               : postDetails.dislikedBy
           }
-          setDisplay={setVotesModal}
+          setDisplay={toggleVotesModal}
           display={votesModal}
         />
       )}
@@ -119,13 +106,10 @@ const Post = ({ post, user: originalPoster, removePost }) => {
             src={originalPoster?.avatar}
             alt=""
             className="user-img-post"
-            onClick={() => routeToProfile(originalPoster.handle)}
+            onClick={routeToProfile}
           />
           <div className="post-details-info">
-            <p
-              className="user-username"
-              onClick={() => routeToProfile(originalPoster.handle)}
-            >
+            <p className="user-username" onClick={routeToProfile}>
               {`${originalPoster?.fullName}`}{" "}
             </p>
             <p className="publish-time">
@@ -153,7 +137,7 @@ const Post = ({ post, user: originalPoster, removePost }) => {
               src={post.image}
               alt=""
               className="img"
-              onClick={() => setImgModal(true)}
+              onClick={toggleImageModal}
             />
           )}
         </div>
@@ -174,7 +158,7 @@ const Post = ({ post, user: originalPoster, removePost }) => {
           <p
             onClick={() => {
               setVotesModalMode("LIKE");
-              setVotesModal(true);
+              toggleVotesModal(true);
             }}
           >
             {postDetails.likes} likes{" "}
@@ -190,7 +174,7 @@ const Post = ({ post, user: originalPoster, removePost }) => {
           <p
             onClick={() => {
               setVotesModalMode("DISLIKE");
-              setVotesModal(true);
+              toggleVotesModal(true);
             }}
           >
             {postDetails.dislikes} dislikes

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { BsEmojiSmile } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import "../styles/reply.css";
-import apiUrl from "./API_URL";
 import EmotePicker from "./EmotePicker";
+import api from "../api/api";
+
 const Reply = ({ addReply, postId }) => {
   const { user } = useSelector((state) => state.user);
   const [display, setDisplay] = useState(false);
@@ -16,13 +16,10 @@ const Reply = ({ addReply, postId }) => {
   });
   const commitReply = async () => {
     try {
-      const response = await axios.post(
-        `${apiUrl}/api/post/reply`,
-        { ...reply, published: new Date() },
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await api.post(`/api/post/reply`, {
+        ...reply,
+        published: new Date(),
+      });
       addReply(response.data);
       resetReply();
     } catch (error) {

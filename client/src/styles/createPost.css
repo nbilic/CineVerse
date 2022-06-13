@@ -1,6 +1,6 @@
 .create-post-div {
     width: 100%;
-    margin-top: 3%;
+    margin-top: 1.7%;
     background-color: #fff;
     border-radius: 2%;
     display: flex;
@@ -8,6 +8,7 @@
     height: fit-content;
     padding: 10px;;
     flex-direction: column;
+    border-top: 0px solid red;
 }
 
 .container{
@@ -20,6 +21,10 @@
     border-radius: 10px;
     margin: 0px 11px;
     object-fit: cover;
+}
+
+.user-img:hover {
+    cursor: pointer;
 }
 
 .post-box {

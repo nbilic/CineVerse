@@ -1,8 +1,8 @@
 import "../styles/register.css";
 import { useState } from "react";
 import FormInput from "./FormInput";
-import apiUrl from "./API_URL";
-import axios from "axios";
+import api from "../api/api";
+
 const Register = ({ setLogin }) => {
   const [values, setValues] = useState({
     firstName: "",
@@ -81,16 +81,12 @@ const Register = ({ setLogin }) => {
 
   const register = async () => {
     try {
-      await axios.post(
-        `${apiUrl}/auth/register`,
-        {
-          firstName: values.firstName,
-          lastName: values.lastName,
-          password: values.password,
-          email: values.email,
-        },
-        { withCredentials: true }
-      );
+      await api.post(`/auth/register`, {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password,
+        email: values.email,
+      });
 
       //triggerToast(true, "Account succesfully registered!");
       setLogin(true);
@@ -102,7 +98,6 @@ const Register = ({ setLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log(values);
     inputs.forEach((input, index) => {
       let error = false;
       if (input.name === "confirmPassword") {
@@ -131,64 +126,6 @@ const Register = ({ setLogin }) => {
         {inputs.map((input) => (
           <FormInput {...input} onChange={onChange} key={input.id} />
         ))}
-        {/* <div className="two-inputs">
-          <label>
-            First name:
-            <input
-              type="text"
-              placeholder="First name"
-              className="text-input full-name-input"
-            />
-          </label>
-          <label>
-            Last name:
-            <input
-              type="text"
-              placeholder="Last name"
-              className="text-input full-name-input"
-            />
-          </label>
-        </div>
-        <div className="two-inputs">
-          <label>
-            Handle:
-            <input
-              type="text"
-              placeholder="@Handle"
-              className="text-input full-name-input"
-            />
-          </label>
-          <label>
-            Country:
-            <input
-              type="select"
-              placeholder="Country"
-              className="text-input full-name-input"
-            />
-          </label>
-        </div>
-
-        <label>
-          E-mail:
-          <input type="email" placeholder="E-mail" className="email-input" />
-        </label>
-
-        <label>
-          Password:
-          <input
-            type="password"
-            placeholder="Password"
-            className="password-input"
-          />
-        </label>
-        <label>
-          Confim password:
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className="password-input"
-          />
-        </label> */}
         <button>Register</button>
       </form>
 

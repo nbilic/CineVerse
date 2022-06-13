@@ -5,6 +5,7 @@ const router = require("express").Router();
 const { requireUser } = require("../middleware/requireUser");
 const { verifyJWT, signJWT } = require("../utils/jwt.utils");
 const axios = require("axios");
+
 const checkIfUserHasAuthorizedAcces = (loggedInEmail, email) =>
   loggedInEmail === email;
 
@@ -243,13 +244,14 @@ router.get("/replies/:id", async (req, res) => {
       post.replies?.map(async (reply) => {
         let cleanedReply = await Reply.findById(reply);
         const user = await User.findById(cleanedReply.author);
-        const { firstName, lastName, avatar } = user;
+        const { firstName, lastName, avatar, handle } = user;
 
         cleanedReply = cleanedReply._doc;
         return {
           firstName,
           lastName,
           avatar,
+          handle,
           ...cleanedReply,
         };
       })

@@ -10,7 +10,6 @@ const Navbar = () => {
   const routeToHome = () => {
     navigate("/");
   };
-  /* const img = "https://avatarfiles.alphacoders.com/211/thumb-211603.jpg"; */
   return (
     <>
       <nav className="navbar">

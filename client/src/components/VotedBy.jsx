@@ -1,17 +1,16 @@
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import "../styles/votedBy.css";
-import apiUrl from "./API_URL";
 import { AiOutlineClose } from "react-icons/ai";
+import api from "../api/api";
+
 const VotedBy = ({ vote, votedBy, setDisplay, display }) => {
   const [users, setUsers] = useState([]);
   const ref = useRef();
   useEffect(() => {
     const getListOfUsers = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/user/users`, {
+        const response = await api.get(`/api/user/users`, {
           params: { users: votedBy },
-          withCredentials: true,
         });
         setUsers(response.data);
       } catch (error) {
@@ -24,7 +23,7 @@ const VotedBy = ({ vote, votedBy, setDisplay, display }) => {
 
   useEffect(() => {
     if (display) {
-      document.body.style.overflow = "hidden";
+      //document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "scroll";
     }

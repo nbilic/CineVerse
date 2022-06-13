@@ -1,5 +1,5 @@
 import "../styles/imageModal.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const ImageModal = ({ display, setDisplay, img }) => {
   const ref = useRef();
@@ -19,7 +19,7 @@ const ImageModal = ({ display, setDisplay, img }) => {
     return () => {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
-  }, [display]);
+  }, [display, setDisplay]);
   return (
     <div className="image-modal">
       <img src={img} className="img-image-modal" alt="" ref={ref} />

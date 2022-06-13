@@ -3,23 +3,28 @@ import ReactTimeAgo from "react-time-ago";
 import "../styles/replies.css";
 import { useSelector } from "react-redux";
 import { TiDelete } from "react-icons/ti";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import ConfirmAction from "./ConfirmAction";
-import apiUrl from "./API_URL";
+import api from "../api/api";
+
 const Replies = ({ reply, removeReply }) => {
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [displayConfirmAction, setDisplayConfirmAction] = useState(false);
   const deleteReply = async () => {
     setDisplayConfirmAction(false);
     try {
-      await axios.delete(`${apiUrl}/api/post/reply/${reply._id}`, {
-        withCredentials: true,
-      });
+      await api.delete(`/api/post/reply/${reply._id}`);
       removeReply(reply);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const routeToProfile = (handle) => {
+    navigate(`/profile/${handle}`);
+  };
+
   useEffect(() => {
     if (displayConfirmAction) {
       document.body.style.overflow = "hidden";
@@ -29,12 +34,20 @@ const Replies = ({ reply, removeReply }) => {
   }, [displayConfirmAction]);
   return (
     <div className="reply-box">
-      <img src={reply?.avatar} alt="" className="user-img-comment" />
+      <img
+        src={reply?.avatar}
+        alt=""
+        className="user-img-comment"
+        onClick={() => routeToProfile(reply.handle)}
+      />
       <div className="reply-content-container">
         <div className="triangle"></div>
         <div className="inner-triangle"></div>
         <div className="reply-upper">
-          <p className="reply-username">{`${reply.firstName} ${reply.lastName}`}</p>
+          <p
+            className="reply-username"
+            onClick={() => routeToProfile(reply.handle)}
+          >{`${reply.firstName} ${reply.lastName}`}</p>
           <p className="published">
             <ReactTimeAgo date={new Date(reply.createdAt)} locale="en-US" />
           </p>
@@ -52,6 +65,7 @@ const Replies = ({ reply, removeReply }) => {
         <ConfirmAction
           setDisplayConfirmAction={setDisplayConfirmAction}
           deleteReply={deleteReply}
+          content={"Are you sure you wish to delete this reply?"}
         />
       )}
     </div>

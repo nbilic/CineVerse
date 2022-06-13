@@ -6,15 +6,16 @@
 
 .profile-display-container{
     background-color: white;
-    margin-top: 4%;
+    margin-top: 1.7%;
     color:#3f4244
     
 }
 
 .upper-container{
-    height: 250px;
+    height: 350px;
     overflow: hidden;
     background-color: #3f4244;
+    object-fit: cover;
 }
 
 .banner{
@@ -35,13 +36,50 @@
     margin-top: calc(var(--profile-avatar-width)/2 * -1);
     border:2px solid rgb(226, 226, 226);
     border-radius: 10px;
+    object-fit:  cover;
     /* margin-left: 30px; */
-
 }
-.bottom-container{
-   /*  margin-left: 20px; */
+.profile-cross-section{
+   border:0px solid red;
+   display: flex;
+   align-items: center;
 }
 
+.user-interactions{
+    position: absolute;
+    right: 0;
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.send-message-icon{
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.send-message-icon:hover{
+    cursor: pointer;
+}
+.profile-cross-section   button {
+    height: 38px;
+    width: 100px;/* 
+    margin-top: calc(var(--profile-avatar-width)/2 * -1); */
+    
+    background-color: rgb(28, 174, 241);
+    color:rgb(255, 255, 255);
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 20px;
+    font-size: .8em;
+    transition: .2s ease;
+}
+
+.profile-cross-section   button:hover {
+    cursor: pointer;
+    background-color: crimson;
+}
 .profile-name{
     text-transform: uppercase;
 

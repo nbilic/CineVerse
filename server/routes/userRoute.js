@@ -18,6 +18,49 @@ router.get("/single/:handle", async (req, res) => {
   }
 });
 
+// Edit general user information
+router.put("/:id", async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = await User.findById(req.params.id);
+    const { newBanner, newAvatar, ...other } = req.body;
+
+    //Check if handle is taken
+    const taken = await User.findOne({ handle: req.body.handle });
+
+    /*  if (taken && taken._id !== user._id) {
+      return res.status(500).json("Handle taken");
+    } */
+
+    console.log(other);
+    const s = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          ...other,
+          avatar: newAvatar || user.avatar,
+          banner: newBanner || user.banner,
+        },
+      },
+      { new: true }
+    );
+    /*  console.log(user);
+    await user.insert({ test: 1 }); */
+    /* user.insert({
+      ...user._doc,
+      ...other,
+      avatar: newAvatar || user.avatar,
+      banner: newBanner || user.banner,
+    });
+ */
+
+    //await user.save();
+    return res.status(200).json(s);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
 // Get a list of users within an array of users
 router.get("/users", async (req, res) => {
   try {
@@ -134,10 +177,19 @@ router.put("/managerequests", requireUser, async (req, res) => {
     const receiver = await User.findById(req.body.receiverId);
     const sender = await User.findById(req.body.senderId);
 
-    if (!checkIfUserHasAuthorizedAcces(req.user.email, receiver.email))
+    console.log("receiver: ", receiver.handle, "sender: ", sender.handle);
+    if (!checkIfUserHasAuthorizedAcces(req.user.email, sender.email))
       return res.status(403).json("Unauthorized action!");
 
     receiver.incomingRequests = receiver.incomingRequests.filter(
+      (req) => req !== sender._id.toString()
+    );
+
+    sender.incomingRequests = sender.incomingRequests.filter(
+      (req) => req !== receiver._id.toString()
+    );
+
+    receiver.outgoingRequests = receiver.outgoingRequests.filter(
       (req) => req !== sender._id.toString()
     );
 
@@ -152,8 +204,7 @@ router.put("/managerequests", requireUser, async (req, res) => {
 
     await receiver.save();
     await sender.save();
-
-    return res.status(200).json(receiver);
+    return res.status(200).json(sender);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -161,11 +212,11 @@ router.put("/managerequests", requireUser, async (req, res) => {
 });
 
 // Remove friend
-router.put("/removefriend", requireUser, async (req, res) => {
+router.delete("/removefriend", requireUser, async (req, res) => {
   try {
     // Get both users involved in the request
-    const remover = await User.findById(req.params.removerId);
-    const removed = await User.findById(req.params.removedId);
+    const remover = await User.findById(req.query.removerId);
+    const removed = await User.findById(req.query.removedId);
 
     if (!checkIfUserHasAuthorizedAcces(req.user.email, remover.email))
       return res.status(403).json("Unauthorized action!");
@@ -181,7 +232,7 @@ router.put("/removefriend", requireUser, async (req, res) => {
     await remover.save();
     await removed.save();
 
-    return res.status(200).json("Friend removed!");
+    return res.status(200).json(remover);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

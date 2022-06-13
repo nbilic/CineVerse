@@ -1,21 +1,19 @@
-import { useSelector } from "react-redux";
-import FriendInvites from "../components/FriendInvites";
-import FriendsDisplay from "../components/FriendsDisplay";
-
 import Navbar from "../components/Navbar";
-import RecentUsers from "../components/RecentUsers";
 import Shortcuts from "../components/Shortcuts";
 import UserDisplay from "../components/UserDisplay";
 import ProfileDisplay from "../components/ProfileDisplay";
 import "../styles/profile.css";
 import { useState, useEffect } from "react";
 import Post from "../components/Post";
-import apiUrl from "../components/API_URL";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import Loading from "../components/Loading";
+import api from "../api/api";
+import { useSelector } from "react-redux";
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const { user: activeUser } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { handle } = useParams();
   const removePost = (post) => {
     const filteredPosts = posts.filter((p) => p.post._id !== post._id);
@@ -25,15 +23,17 @@ const Profile = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await axios.get(
-          `${apiUrl}/api/post/user/${user._id}`,
-          { params: { count: 10 }, withCredentials: true }
-        );
+        setLoading(true);
+        const response = await api.get(`/api/post/user/${user._id}`, {
+          count: 10,
+        });
 
         /* console.log(response.data); */
         setPosts([...response.data]);
       } catch (error) {
         console.log("error => ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -42,32 +42,34 @@ const Profile = () => {
 
   useEffect(() => {
     const getUser = async () => {
+      setPosts([]);
       try {
-        const response = await axios.get(`${apiUrl}/api/user/single/${handle}`);
-        setUser(response.data);
+        if (handle === activeUser.handle) setUser(activeUser);
+        //console.log(user.handle,handle);
+        else {
+          const response = await api.get(`/api/user/single/${handle}`);
+          setUser(response.data);
+        }
       } catch (error) {
         console.log(error);
       }
     };
-
     getUser();
-  }, []);
+  }, [handle, activeUser]);
+
   return (
     <div className="profile">
       <Navbar />
-
+      {loading && <Loading />}
       <div className="main-content grid-container">
-        <div className="y">
+        <div className="sidebar">
           <UserDisplay />
           <Shortcuts />
-          {
-            /*    <RecentUsers /> */
-            // maybe ode things u have in common sa korisnikon
-          }
         </div>
 
-        <div className="center">
-          <ProfileDisplay user={user} />
+        <div className="">
+          <ProfileDisplay profile={user} />
+
           {posts?.map((post) => (
             <Post
               key={post?.post._id}

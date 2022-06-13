@@ -7,15 +7,14 @@ import Post from "../components/Post";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import FriendInvites from "../components/FriendInvites";
-import axios from "axios";
-import apiUrl from "../components/API_URL";
 import RecentUsers from "../components/RecentUsers";
 import UserDisplay from "../components/UserDisplay";
-import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
+import api from "../api/api";
 const Homepage = () => {
   const { user } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const addNewPost = (post) => {
     setPosts([{ user, post }, ...posts]);
   };
@@ -27,15 +26,17 @@ const Homepage = () => {
 
   useEffect(() => {
     const getPosts = async () => {
+      setLoading(true);
       try {
-        const response = await axios.get(
-          `${apiUrl}/api/post/timeline/${user._id}`,
-          { params: { count: 10 }, withCredentials: true }
-        );
+        const response = await api.get(`/api/post/timeline/${user._id}`, {
+          count: 10,
+        });
 
         setPosts([...response.data]);
       } catch (error) {
         console.log("error => ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -47,14 +48,15 @@ const Homepage = () => {
       <Navbar />
 
       <div className="main-content grid-container">
-        <div className="y">
+        <div className="grid-item sidebar">
           <UserDisplay />
           <Shortcuts />
           <RecentUsers />
         </div>
 
-        <div className="center">
+        <div className="center grid-item">
           <CreatePost addNewPost={addNewPost} />
+          {loading && <Loading />}
           {posts?.map((post) => (
             <Post
               key={post?.post._id}
@@ -65,7 +67,7 @@ const Homepage = () => {
           ))}
         </div>
 
-        <div className="x">
+        <div className="grid-item sidebar">
           <FriendInvites />
           <FriendsDisplay />
         </div>
