@@ -1,16 +1,16 @@
-import Navbar from "../components/Navbar";
-import Shortcuts from "../components/Shortcuts";
-import UserDisplay from "../components/UserDisplay";
-import ProfileDisplay from "../components/ProfileDisplay";
+import Navbar from "../components/Layout/Navbar";
+import Shortcuts from "../components/Layout/Shortcuts";
+import UserDisplay from "../components/Layout/UserDisplay";
+import ProfileDisplay from "../components/Profile/ProfileDisplay";
 import "../styles/profile.css";
 import { useState, useEffect } from "react";
-import Post from "../components/Post";
+import Post from "../components/Posts/Post";
 import { useParams } from "react-router-dom";
 import api from "../api/api";
 import { useSelector } from "react-redux";
 
 import RotateLoader from "react-spinners/RotateLoader";
-import FriendsDisplay from "../components/FriendsDisplay";
+import FriendsDisplay from "../components/Friends/FriendsDisplay";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const { user: activeUser } = useSelector((state) => state.user);

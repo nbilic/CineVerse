@@ -1,12 +1,12 @@
-import Post from "../components/Post";
+import Post from "../components/Posts/Post";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import api from "../api/api";
 import RotateLoader from "react-spinners/RotateLoader";
-import Navbar from "../components/Navbar";
-import UserDisplay from "../components/UserDisplay";
-import Shortcuts from "../components/Shortcuts";
+import Navbar from "../components/Layout/Navbar";
+import UserDisplay from "../components/Layout/UserDisplay";
+import Shortcuts from "../components/Layout/Shortcuts";
 import "../styles/singlePostContainer.css";
 
 const SinglePost = () => {

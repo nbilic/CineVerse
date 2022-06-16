@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import Friend from "./Friend";
+import Friend from "./Friends/Friend";
 import "../styles/test.css";
 import { disableScroll } from "../functions/modifyScroll";
 

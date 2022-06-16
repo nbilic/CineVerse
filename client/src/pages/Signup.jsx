@@ -1,7 +1,7 @@
 import "../styles/signup.css";
 import logo from "../images/logo-2.png";
-import Login from "../components/Login";
-import Register from "../components/Register";
+import Login from "../components/Authentication/Login";
+import Register from "../components/Authentication/Register";
 import { useState } from "react";
 const Signup = () => {
   const [login, setLogin] = useState(true);

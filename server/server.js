@@ -56,11 +56,14 @@ io.on("connection", async (socket) => {
     console.log(onlineUsers.length);
     online && io.to(online.socketId).emit("inf", vote);
   });
-  socket.on("hi", (x) => {
-    console.log(x);
+
+  socket.on("join-room", (room) => {
+    socket.join(room);
+  });
+  socket.on("pm-out", ({ room, msg, sender, file }) => {
+    io.to(room).emit("pm", { content: msg, id: uuidv4(), sender, file });
   });
   socket.on("newMessage", ({ payload: user, message }) => {
-    console.log(user);
     const payload = {
       user: user,
       message: { message, messageId: uuidv4() },
@@ -69,11 +72,6 @@ io.on("connection", async (socket) => {
   });
   socket.on("newUser", async (id) => {
     onlineUsers = await addNewUser(id, socket.id, onlineUsers);
-    /* io.emit("onlineUsers", onlineUsers); */
-  });
-
-  socket.on("connect", () => {
-    console.log("someone connected");
   });
 
   socket.on("disconnect", () => {

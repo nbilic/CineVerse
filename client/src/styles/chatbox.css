@@ -1,0 +1,144 @@
+.chatbox-container{
+    background-color: white;
+    padding: 15px;
+
+    margin-top: 1.7%;
+    height: 75vh;
+}
+
+.friend-private-chat{
+    border-left: 0px solid rgb(124, 118, 118);
+    margin-left: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    
+}
+
+.friend-private-chat-input{
+    width: 90%;
+    border-radius: 10px;
+    border:0px solid rgb(124, 118, 118);
+    padding: 10px;
+    align-self: flex-end;
+}
+
+.friend-private-chat-input:focus{
+    outline: none;
+}
+
+
+.friend-chat-div{
+    display: flex;
+    align-items: center;
+    justify-self: flex-end;
+}
+
+.friend-chat-div:hover{
+    cursor: pointer;
+}
+
+.chat-controlls{
+    display: block;
+    margin-top: 2%;
+    width: 100%;
+    display: flex;
+    border:1px solid rgb(124, 118, 118);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+}
+
+.messages{
+    height: 62vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+   /*  width: 200px; */
+    border-left:1px solid rgb(124, 118, 118);
+  
+}
+
+.active-chat{
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}
+
+.left-msg,.right-msg{
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 1% 0%;
+    width: fit-content;
+    color:white;
+    word-wrap: break-word;
+    max-width: 500px;
+}
+
+
+.left-msg{
+    background-color: rgb(56, 182, 231);
+    margin-left: 10px;
+}
+.right-msg{
+    /* display: inline-block; */
+    align-self: flex-end;
+    background-color: rgb(25, 226, 102);
+    text-align: end;
+    margin-right: 10px;
+}
+
+
+.chatbox-container-center{
+    display: flex;
+}
+
+.chatbox-container .chat-upper-layer{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+    color:rgb(56, 182, 231);
+}
+
+.chat-upper-layer h2{
+    margin-left: 10px;
+}
+
+.chat-bell-icon{
+    font-size: 2em;
+    color:rgb(56, 182, 231);
+    background-color: #f1f1f1;
+    padding: 5px;
+    border-radius: 50%;
+
+}
+
+.chat-action-icon{
+    font-size: 1.2em;
+    margin: 0px 5px;
+    color:rgb(97, 96, 96);
+}
+
+.chat-action-icon:hover{
+    cursor: pointer;
+}
+
+.chat-select{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+   
+
+}
+
+.chat-img{
+    max-width: 200px;
+    background-color: white;
+    border:1px solid rgba(20,20,20,0.2);
+    padding: 0;
+}
+
+.chat-img:hover{
+    cursor: pointer;
+}
