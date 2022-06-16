@@ -30,6 +30,10 @@
     padding:0px 30px;
 }
 
+.banner:hover,.profile-avatar:hover{
+    cursor: pointer;
+}
+
 .profile-avatar{
     height: var(--profile-avatar-height);
     width: var(--profile-avatar-width);
@@ -107,9 +111,10 @@
 .profile-personal-info > div {
     display: flex;
     align-items: center;
+    
 }
 
-.profile-personal-info > div > p{
+.profile-personal-info  p {
     margin-left: 5px;
 }
 .profile-stats{
@@ -122,4 +127,9 @@
 }
 .friends-incommon{
     margin: 2% 0%;
+}
+
+.profile-display-container a{
+    text-decoration: none;
+    color:inherit
 }

@@ -11,6 +11,8 @@
     justify-content: center;
     overflow: hidden;
     flex-direction: column;
+    border:0px solid red;
+    
 }
 
 .users-container{

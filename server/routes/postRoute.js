@@ -333,4 +333,15 @@ router.put("/vote/:id", requireUser, async (req, res) => {
   }
   //
 });
+
+// Get specific post by id
+router.get("/specific-post/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
 module.exports = router;

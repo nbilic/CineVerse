@@ -9,14 +9,17 @@
     box-sizing: border-box;
     font-family: "Muli", "Segoe Ui";
     position: relative;
+   
 
 }
 
 .App{
     min-height: 100vh;
     border:0px solid red;
+    
  }
 
 body{
     overflow-y: scroll;
+
 }

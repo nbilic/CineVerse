@@ -1,6 +1,7 @@
 import { FaRegComments } from "react-icons/fa";
 import { RiDislikeLine, RiHeart2Line } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { FiExternalLink } from "react-icons/fi";
 import Reply from "./Reply";
 import "../styles/post.css";
 import { useEffect, useState } from "react";
@@ -13,10 +14,12 @@ import VotedBy from "./VotedBy";
 import useToggle from "../hooks/useToggle";
 import useRouteToProfile from "../hooks/useRouteToProfile";
 import api from "../api/api";
-
+import { useNavigate } from "react-router-dom";
 const Post = ({ post, user: originalPoster, removePost }) => {
   const [replies, setReplies] = useState([]);
+  const navigate = useNavigate();
   const [options, setOptions] = useState(false);
+  const { socket } = useSelector((state) => state.socket);
   const [votesModalMode, setVotesModalMode] = useState();
   const [imageModal, toggleImageModal] = useToggle(false);
   const [votesModal, toggleVotesModal] = useToggle(false);
@@ -50,6 +53,8 @@ const Post = ({ post, user: originalPoster, removePost }) => {
       });
 
       setPostDetails(response.data);
+      // EMIT TO USER
+      socket && socket.emit("RATED", { vote, id: originalPoster._id });
     } catch (error) {
       console.log(error);
     }
@@ -116,10 +121,17 @@ const Post = ({ post, user: originalPoster, removePost }) => {
               <ReactTimeAgo date={new Date(post?.publishedAt)} locale="en-US" />
             </p>
           </div>
-          <BsThreeDotsVertical
-            className="menu-icon"
-            onClick={() => setOptions(!options)}
-          />
+          <div className="menu-icon">
+            <FiExternalLink
+              className="single-post-route menu-icon-option"
+              onClick={() => navigate(`/post/${post._id}`)}
+            />
+            <BsThreeDotsVertical
+              className="menu-icon-option"
+              onClick={() => setOptions(!options)}
+            />
+          </div>
+
           <div className={`post-options-menu ${!options && "hidden"}`}>
             <PostOptions
               className="post-options-menu"

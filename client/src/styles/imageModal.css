@@ -18,8 +18,10 @@
 .image-modal  .img-image-modal{
     max-width: 100%;
     max-height: 90%;
-    
+    background-color: white;
 }
+
+
 
 .image-modal button{
 
@@ -28,3 +30,21 @@
    
 }
 
+
+.close-image-modal{
+    top: 20px;
+    left: 20px;
+    position:absolute;
+    background-color: rgba(30,30,30,.5);
+    font-size: 2em;
+    color:white;
+    padding: 5px;
+    border-radius: 50%;
+    transition: .2s ease;
+}
+
+.close-image-modal:hover{
+    color:crimson;
+    background-color: rgba(230,230,230,.8);
+    cursor: pointer;
+}

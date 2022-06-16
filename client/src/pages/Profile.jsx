@@ -6,14 +6,16 @@ import "../styles/profile.css";
 import { useState, useEffect } from "react";
 import Post from "../components/Post";
 import { useParams } from "react-router-dom";
-import Loading from "../components/Loading";
 import api from "../api/api";
 import { useSelector } from "react-redux";
+
+import RotateLoader from "react-spinners/RotateLoader";
+import FriendsDisplay from "../components/FriendsDisplay";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const { user: activeUser } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { handle } = useParams();
   const removePost = (post) => {
     const filteredPosts = posts.filter((p) => p.post._id !== post._id);
@@ -27,8 +29,6 @@ const Profile = () => {
         const response = await api.get(`/api/post/user/${user._id}`, {
           count: 10,
         });
-
-        /* console.log(response.data); */
         setPosts([...response.data]);
       } catch (error) {
         console.log("error => ", error);
@@ -44,6 +44,7 @@ const Profile = () => {
     const getUser = async () => {
       setPosts([]);
       try {
+        setLoading(true);
         if (handle === activeUser.handle) setUser(activeUser);
         //console.log(user.handle,handle);
         else {
@@ -52,7 +53,9 @@ const Profile = () => {
         }
       } catch (error) {
         console.log(error);
-      }
+      } /* finally {
+        setLoading(false);
+      } */
     };
     getUser();
   }, [handle, activeUser]);
@@ -60,7 +63,6 @@ const Profile = () => {
   return (
     <div className="profile">
       <Navbar />
-      {loading && <Loading />}
       <div className="main-content grid-container">
         <div className="sidebar">
           <UserDisplay />
@@ -68,8 +70,12 @@ const Profile = () => {
         </div>
 
         <div className="">
-          <ProfileDisplay profile={user} />
-
+          {!loading && <ProfileDisplay profile={user} />}
+          {loading && (
+            <div className="loader-container">
+              <RotateLoader color="lightblue" size={10} loading={loading} />
+            </div>
+          )}
           {posts?.map((post) => (
             <Post
               key={post?.post._id}
@@ -80,10 +86,9 @@ const Profile = () => {
           ))}
         </div>
 
-        <div className="x">
-          {/* <FriendInvites />
-          <FriendsDisplay /> */}
-        </div>
+        {/*   <div className="x">
+          <FriendsDisplay />
+        </div> */}
       </div>
     </div>
   );

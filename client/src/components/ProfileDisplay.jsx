@@ -8,14 +8,19 @@ import reqConstants from "../api/reqConstants";
 import useToggle from "../hooks/useToggle";
 import ConfirmAction from "./ConfirmAction";
 import EditProfileModal from "./EditProfileModal";
+import FriendsInCommon from "./FriendsInCommon";
+import ImageModal from "./ImageModal";
 
 const ProfileDisplay = ({ profile }) => {
   const { user } = useSelector((state) => state.user);
-
   const [buttonText, setButtonText] = useState("");
   const [friendsWithUser, setFriendsWithUser] = useState(false);
+  const [commonFriends, setCommonFriends] = useState([]);
+  const [imageModalContent, setImageModalContent] = useState(null);
   const [value, setValue] = useToggle(false);
   const [edit, toggleEdit] = useToggle(false);
+  const [imageModal, toggleImageModal] = useToggle(false);
+  const [displayCommonFriends, toggleDisplayCommonFriends] = useToggle(false);
   const [confirmActionText, setConfirmActionText] = useState("");
   const manageFriends = useManageFriends();
   const { ADD, REM, CHECK_ADDED, CHECK_FRIENDS, CANCEL, PENDING, EDIT } =
@@ -48,18 +53,37 @@ const ProfileDisplay = ({ profile }) => {
     // ADD FRIENDS MSG
   };
 
+  const editImageModal = (img) => {
+    setImageModalContent(img);
+    toggleImageModal();
+  };
   useEffect(() => {
+    const getCommonFriends = async () => {
+      const common = user.friends.filter(
+        (val) => profile.friends.indexOf(val) != -1
+      );
+      setCommonFriends(common);
+    };
     getButtonText();
-    /* console.log(fe);
-    if (user._id === fe?._id) {
-      setProfile(user);
-    } else {
-      setProfile(fe);
-    } */
+    getCommonFriends();
   }, [user, profile]);
 
   return (
     <div className="profile-display-container">
+      {imageModal && (
+        <ImageModal
+          display={imageModal}
+          setDisplay={toggleImageModal}
+          img={imageModalContent}
+        />
+      )}
+      {displayCommonFriends && (
+        <FriendsInCommon
+          friends={commonFriends}
+          display={displayCommonFriends}
+          setDisplay={toggleDisplayCommonFriends}
+        />
+      )}
       {edit && (
         <EditProfileModal user={user} display={edit} setDisplay={toggleEdit} />
       )}
@@ -70,13 +94,24 @@ const ProfileDisplay = ({ profile }) => {
           content={confirmActionText}
         />
       )}
+
       <div className="upper-container">
-        <img src={profile?.banner} alt="" className="banner" />
+        <img
+          src={profile?.banner}
+          alt=""
+          className="banner"
+          onClick={() => editImageModal(profile?.banner)}
+        />
       </div>
 
       <div className="bottom-container">
         <div className="profile-cross-section">
-          <img src={profile?.avatar} alt="" className="profile-avatar" />
+          <img
+            src={profile?.avatar}
+            alt=""
+            className="profile-avatar"
+            onClick={() => editImageModal(profile?.avatar)}
+          />
 
           <div className="user-interactions">
             {friendsWithUser && (
@@ -105,7 +140,9 @@ const ProfileDisplay = ({ profile }) => {
           {profile?.link && (
             <div>
               <AiOutlineLink />
-              <p>{profile?.link}</p>
+              <a href={`https://${profile?.link}`}>
+                <p>{profile?.link}</p>
+              </a>
             </div>
           )}
           <div>
@@ -113,11 +150,20 @@ const ProfileDisplay = ({ profile }) => {
             <p>Joined {new Date(profile?.createdAt).toLocaleDateString()}</p>
           </div>
         </div>
-        <div className="profile-stats">
-          <p className="stat">{user.friends?.length} Friends</p>
-          <p className="stat">{user.posts?.length} Posts</p>
-        </div>
-        <div className="friends-incommon">You have no friends in common</div>
+        {
+          <div className="profile-stats">
+            {/* <p className="stat">{user.friends?.length} Friends</p>
+            <p className="stat">{user.posts?.length} Posts</p> */}
+            {user._id !== profile._id && (
+              <p
+                className="stat"
+                onClick={toggleDisplayCommonFriends}
+              >{`You have ${commonFriends.length} friend${
+                commonFriends.length === 1 ? "" : "s"
+              } in common`}</p>
+            )}
+          </div>
+        }
       </div>
     </div>
   );

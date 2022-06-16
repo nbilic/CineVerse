@@ -62,6 +62,7 @@
     justify-content: center;
     height: 254px;
     object-fit: cover;
+    background-color: white;
 }
 
 .avatar-preview{
@@ -71,6 +72,7 @@
     /* margin-left: 16px; */
     object-fit: cover;
     border-radius: 10px;
+    background-color: white;
 }
 
 .save-profile-changes{
@@ -80,12 +82,18 @@
     color:white;
     text-transform: uppercase;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .save-profile-changes:hover{
     cursor: pointer;
 }
 
+.saving{
+    margin-left: 10px;
+}
 .banner-buttons{
     position: absolute;
     top: 0;

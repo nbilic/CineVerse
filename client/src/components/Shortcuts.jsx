@@ -34,7 +34,7 @@ const Shortcuts = () => {
         <li>
           <HiUserGroup className="shortcut-icons" /> Forum
         </li>
-        <li>
+        <li onClick={() => navigate("/chat")}>
           <BiMessageDetail className="shortcut-icons" /> Inbox
         </li>
         <li>

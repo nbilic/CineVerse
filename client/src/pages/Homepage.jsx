@@ -11,6 +11,7 @@ import RecentUsers from "../components/RecentUsers";
 import UserDisplay from "../components/UserDisplay";
 import Loading from "../components/Loading";
 import api from "../api/api";
+import RotateLoader from "react-spinners/RotateLoader";
 const Homepage = () => {
   const { user } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
@@ -41,6 +42,7 @@ const Homepage = () => {
     };
 
     user?._id && getPosts();
+    //!user?._id && setLoading(true);
   }, [user]);
 
   return (
@@ -56,7 +58,19 @@ const Homepage = () => {
 
         <div className="center grid-item">
           <CreatePost addNewPost={addNewPost} />
-          {loading && <Loading />}
+          {/* {loading && <Loading />} */}
+
+          {loading && (
+            <div className="loader-container">
+              <RotateLoader
+                color="lightblue"
+                size={10}
+                loading={loading}
+                margin="2"
+              />
+            </div>
+          )}
+
           {posts?.map((post) => (
             <Post
               key={post?.post._id}

@@ -18,62 +18,22 @@ router.get("/single/:handle", async (req, res) => {
   }
 });
 
-// Edit general user information
-router.put("/:id", async (req, res) => {
-  try {
-    console.log(req.body);
-    const user = await User.findById(req.params.id);
-    const { newBanner, newAvatar, ...other } = req.body;
-
-    //Check if handle is taken
-    const taken = await User.findOne({ handle: req.body.handle });
-
-    /*  if (taken && taken._id !== user._id) {
-      return res.status(500).json("Handle taken");
-    } */
-
-    console.log(other);
-    const s = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: {
-          ...other,
-          avatar: newAvatar || user.avatar,
-          banner: newBanner || user.banner,
-        },
-      },
-      { new: true }
-    );
-    /*  console.log(user);
-    await user.insert({ test: 1 }); */
-    /* user.insert({
-      ...user._doc,
-      ...other,
-      avatar: newAvatar || user.avatar,
-      banner: newBanner || user.banner,
-    });
- */
-
-    //await user.save();
-    return res.status(200).json(s);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
-});
 // Get a list of users within an array of users
 router.get("/users", async (req, res) => {
   try {
+    console.log(req.query);
     const users = await Promise.all(
       req.query.users.map(async (userId) => {
         const user = await User.findById(userId);
-        const { firstName, lastName, avatar, _id } = user;
+        const { firstName, lastName, avatar, handle, _id, fullName } = user;
 
         return {
           firstName,
           lastName,
           avatar,
           _id,
+          handle,
+          fullName,
         };
       })
     );
@@ -114,6 +74,7 @@ router.get("/recent", async (req, res) => {
 // Send friend request
 router.put("/addfriend", requireUser, async (req, res) => {
   try {
+    console.log(req.body);
     // Get both users involved in the request
     const receiver = await User.findById(req.body.receiverId);
     const sender = await User.findById(req.body.senderId);
@@ -276,6 +237,31 @@ router.get("/requests/:id", async (req, res) => {
     return res.status(200).json({ outgoing, incoming });
   } catch (error) {
     console.log(error.message);
+    res.status(500).json(error);
+  }
+});
+
+// Edit general user information
+router.put("/:id", async (req, res) => {
+  try {
+    const { newBanner, newAvatar, ...other } = req.body;
+
+    //Check if handle is taken
+    /* const taken = await User.findOne({ handle: req.body.handle }); */
+    const s = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          ...other,
+          avatar: newAvatar || this.avatar,
+          banner: newBanner || this.banner,
+        },
+      },
+      { new: true }
+    );
+    return res.status(200).json(s);
+  } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 });

@@ -2,8 +2,9 @@ import useRouteToProfile from "../hooks/useRouteToProfile";
 
 const Friend = ({ friend }) => {
   const routeToProfile = useRouteToProfile(friend.handle);
+
   return (
-    <li>
+    <li className="friend-li">
       <img
         src={friend.avatar}
         alt=""
@@ -11,13 +12,11 @@ const Friend = ({ friend }) => {
         onClick={routeToProfile}
       />
       <div className="name-handle">
-        <p
-          onClick={routeToProfile}
-        >{`${friend.firstName} ${friend.lastName}`}</p>
+        <p onClick={routeToProfile}>{`${friend.fullName}`}</p>
         <p
           className="friend-handle"
           onClick={routeToProfile}
-        >{`@${friend.firstName}${friend.lastName}`}</p>
+        >{`@${friend.handle}`}</p>
       </div>
     </li>
   );

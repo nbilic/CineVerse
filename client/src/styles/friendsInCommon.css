@@ -1,0 +1,28 @@
+.common-friends-modal{
+    width: 100vw;
+    height: 100vh;
+    border:0px solid red;
+    position:fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgba(30,30,30,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.common-friends-container{
+    border:0px solid blue;
+    width: 25%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    background-color: #F1F1F1;
+    padding: 10px;
+}
+
+.friend-li{
+    display: flex;
+    align-items: center;
+}

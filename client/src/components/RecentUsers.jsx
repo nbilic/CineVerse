@@ -20,7 +20,7 @@ const RecentUsers = () => {
 
   return (
     <div className="recent-users">
-      <h5>Recent users</h5>
+      <h5>RECENT USERS</h5>
       <ul>
         {users.map((profile) => (
           <RecentUser profile={profile} key={profile._id} />

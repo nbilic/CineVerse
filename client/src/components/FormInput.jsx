@@ -1,4 +1,3 @@
-import { AiOutlineQuestionCircle } from "react-icons/ai";
 import "../styles/formInput.css";
 const FormInput = (props) => {
   const {

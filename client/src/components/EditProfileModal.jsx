@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { AiOutlineClose, AiOutlineCamera } from "react-icons/ai";
 import "../styles/editProfileModal.css";
 import api from "../api/api";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../redux/user";
 import Loading from "./Loading";
+import ClipLoader from "react-spinners/ClipLoader";
+import { enableScroll, disableScroll } from "../functions/modifyScroll";
+
 const EditProfileModal = ({ user, display, setDisplay }) => {
   const [newBanner, setNewBanner] = useState(null);
   const avatarRef = useRef(null);
@@ -50,21 +53,15 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
     }
   };
   useEffect(() => {
-    if (display) {
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = "17px";
-    }
+    if (display) disableScroll();
     const checkIfClickedOutside = (e) => {
       if (display && ref.current && !ref.current.contains(e.target)) {
-        document.body.style.overflow = "scroll";
-        document.body.style.paddingRight = "0px";
         setDisplay(false);
       }
     };
     document.addEventListener("mousedown", checkIfClickedOutside);
     return () => {
-      document.body.style.overflow = "scroll";
-      document.body.style.paddingRight = "0px";
+      enableScroll();
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [display, setDisplay]);
@@ -81,7 +78,17 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
             <p>Edit profile</p>
           </div>
           <button className="save-profile-changes" onClick={handleSubmit}>
-            Save
+            {saving && (
+              <ClipLoader
+                color={"white"}
+                loading={saving}
+                /* cssOverride={override} */
+                size={15}
+              />
+            )}
+            <p className={`${saving && "saving"}`}>
+              {saving ? "Saving..." : "Save"}
+            </p>
           </button>
         </div>
         <div className="second-layer">

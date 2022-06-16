@@ -1,6 +1,9 @@
-.profile{
+.single-post-container{
     background-color: #f1f1f1;
     min-height: 100vh;
-    position: relative;
+}
+
+.s-c{
     border:0px solid red;
+    padding: 0;
 }
