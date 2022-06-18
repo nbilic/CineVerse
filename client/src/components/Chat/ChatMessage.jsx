@@ -1,5 +1,6 @@
 import ImageModal from "../Modals/ImageModal";
 import useToggle from "../../hooks/useToggle";
+/* import ReactTimeAgo from "react-time-ago"; */
 const ChatMessage = ({ msg, user }) => {
   const [imageModal, toggleImageModal] = useToggle(false);
   return (
@@ -29,6 +30,9 @@ const ChatMessage = ({ msg, user }) => {
           src={msg.file}
         />
       )}
+      {/*   <p className="message-sent-time">
+        <ReactTimeAgo date={new Date()} locale="en-US" />
+      </p> */}
     </div>
   );
 };

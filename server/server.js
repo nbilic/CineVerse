@@ -61,22 +61,43 @@ io.on("connection", async (socket) => {
     socket.join(room);
   });
   socket.on("pm-out", ({ room, msg, sender, file }) => {
-    io.to(room).emit("pm", { content: msg, id: uuidv4(), sender, file });
+    const user = onlineUsers.find((u) => u._id === room);
+    io.to(user.socketId).to(socket.id).emit("pm", {
+      content: msg,
+      id: uuidv4(),
+      sender,
+      file,
+    });
   });
-  socket.on("newMessage", ({ payload: user, message }) => {
-    const payload = {
-      user: user,
-      message: { message, messageId: uuidv4() },
-    };
-    io.emit("new message", payload);
-  });
-  socket.on("newUser", async (id) => {
-    onlineUsers = await addNewUser(id, socket.id, onlineUsers);
+
+  socket.on("newUser", async ({ userId, friends }) => {
+    onlineUsers = await addNewUser(userId, socket.id, onlineUsers, friends);
+    let onlineFriends = [];
+    onlineUsers.forEach((u) => {
+      friends.forEach((f) => {
+        if (f === u._id) {
+          onlineFriends.push({ _id: f, socketId: u.socketId });
+          io.to(u.socketId).emit("friend-online", {
+            _id: userId,
+            socketId: socket.id,
+          });
+        }
+      });
+    });
+    io.to(socket.id).emit("online-friends", onlineFriends);
   });
 
   socket.on("disconnect", () => {
+    const disconnectedUser = onlineUsers.filter(
+      (r) => r.socketId === socket.id
+    );
     onlineUsers = removeUser(socket.id, onlineUsers);
-    io.emit("onlineUsers", onlineUsers);
+    const friendsToNotify = onlineUsers.filter((user) =>
+      user.friends.includes(disconnectedUser[0]?._id)
+    );
+    friendsToNotify.forEach((friend) => {
+      io.to(friend.socketId).emit("friend-offline", disconnectedUser[0]);
+    });
   });
 });
 

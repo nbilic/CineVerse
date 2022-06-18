@@ -12,12 +12,13 @@ const Replies = ({ reply, removeReply }) => {
   const navigate = useNavigate();
   const [displayConfirmAction, setDisplayConfirmAction] = useState(false);
   const deleteReply = async () => {
-    setDisplayConfirmAction(false);
     try {
       await api.delete(`/api/post/reply/${reply._id}`);
       removeReply(reply);
     } catch (error) {
       console.log(error);
+    } finally {
+      setDisplayConfirmAction(false);
     }
   };
 
@@ -64,7 +65,7 @@ const Replies = ({ reply, removeReply }) => {
       {displayConfirmAction && (
         <ConfirmAction
           setDisplayConfirmAction={setDisplayConfirmAction}
-          deleteReply={deleteReply}
+          confirmAction={deleteReply}
           content={"Are you sure you wish to delete this reply?"}
         />
       )}

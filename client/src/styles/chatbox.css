@@ -7,8 +7,8 @@
 }
 
 .friend-private-chat{
-    border-left: 0px solid rgb(124, 118, 118);
-    margin-left: 10px;
+    border-left: 1px solid rgb(124, 118, 118);
+    margin-left: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -52,13 +52,11 @@
 }
 
 .messages{
-    height: 62vh;
+    height: 55vh;
     overflow: auto;
     display: flex;
     flex-direction: column;
    /*  width: 200px; */
-    border-left:1px solid rgb(124, 118, 118);
-  
 }
 
 .active-chat{
@@ -141,4 +139,53 @@
 
 .chat-img:hover{
     cursor: pointer;
+}
+
+.friend-status-container{
+    
+    display: flex;
+    align-items: center;
+    border:0px solid blue;
+}
+
+
+.friend-status{
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(71, 70, 70);
+    border-radius: 50%;
+}
+.friend-online{
+    transition: 2s ease;
+    border: 3px solid rgb(28, 133, 194);
+}
+
+.friend-offline{
+    transition: 2s ease;
+    border: 3px solid rgb(71, 70, 70);
+}
+
+.friend-status-block{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 48px;
+    align-self: center;
+    margin-top: 10px;
+    
+    
+
+    /* border:1px solid red; */
+}
+
+.message-sent-time{
+    color:gray;
+    font-size: .75em;
+    background-color: transparent;
+    margin-right: 0;
+    margin-left: 0;
 }

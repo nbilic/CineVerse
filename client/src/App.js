@@ -8,34 +8,62 @@ import { useDispatch, useSelector } from "react-redux";
 import Test from "./components/Test";
 import { useEffect, useState } from "react";
 import { setSocket } from "./redux/socket";
+import {
+  setFriends,
+  addNewFriendOnline,
+  removeFriendFromOnline,
+} from "./redux/friends";
 import SinglePost from "./pages/SinglePost";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Inbox from "./pages/Inbox";
 
 const App = () => {
-  //const setSocket = useSocket();
   const { user } = useSelector((state) => state.user);
   const { socket } = useSelector((state) => state.socket);
-  const [connected, setConnected] = useState(false);
+  const { friends } = useSelector((state) => state.friends);
   const dispatch = useDispatch();
   const notify = (input) => toast(input);
   useEffect(async () => {
     await dispatch(setSocket());
   }, []);
+
   useEffect(() => {
     if (socket) {
       socket.on("inf", (x) => {
         notify(x);
       });
+
+      socket.on("online-friends", async (onlineFriends) => {
+        await dispatch(setFriends(onlineFriends));
+      });
+
+      socket.on("friend-online", async (friend) => {
+        await dispatch(addNewFriendOnline(friend));
+      });
+
+      socket.on("friend-offline", async (friend) => {
+        await dispatch(removeFriendFromOnline(friend));
+      });
+
+      socket?.on("pm", async (x) => {
+        notify("YOU GOT MAIL");
+      });
     }
   }, [socket]);
 
   useEffect(() => {
-    socket && user && socket?.emit("newUser", user._id);
+    if (socket && user)
+      socket?.emit("newUser", { userId: user._id, friends: user.friends });
   }, [user]);
+
   return (
     <div className="App">
+      {/* <button onClick={() => console.log(getPath())}>TEST</button>
+      <p>{location.pathname}</p>
+      {friends.map((f) => (
+        <p key={f.socketId}>{`_id: ${f._id} socketId: ${f.socketId}`}</p>
+      ))} */}
       {/* {user && <EditProfileModal user={user} />} */}
       <ToastContainer />
       <Routes>
