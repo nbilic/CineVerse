@@ -47,7 +47,7 @@ const App = () => {
       });
 
       socket?.on("pm", async (x) => {
-        notify("YOU GOT MAIL");
+        /*  notify("YOU GOT MAIL"); */
       });
     }
   }, [socket]);

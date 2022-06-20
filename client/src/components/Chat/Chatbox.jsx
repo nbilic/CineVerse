@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { CgBell } from "react-icons/cg";
 import ChatMessage from "./ChatMessage";
 import Friend from "../Friends/Friend";
+import { toDataURL } from "../../functions/convertImage";
 
 const Chatbox = () => {
   const { user } = useSelector((state) => state.user);
@@ -16,19 +17,13 @@ const Chatbox = () => {
   const [currentFriend, setCurrentFriend] = useState(null);
   const [friends, setFriends] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [singleChatMessages, setSingleChatMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState(false);
   const { socket } = useSelector((state) => state.socket);
   const messagesEndRef = useRef(null);
   const inputFile = useRef(null);
   const [file, setFile] = useState(null);
-  const toDataURL = (img) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setFile(reader.result);
-    };
-    reader.readAsDataURL(img);
-  };
 
   const checkIfOnline = (id) => onlineFriends.find((f) => id === f._id);
   const submitMessage = () => {
@@ -36,6 +31,7 @@ const Chatbox = () => {
       room: currentFriend._id,
       msg: message,
       sender: user.handle,
+      receiver: currentFriend.handle,
       file,
     });
     !file && setMessage("");
@@ -45,9 +41,12 @@ const Chatbox = () => {
     const roomId = makeRoomName(handle);
     setRoom(roomId);
     socket.emit("join-room", roomId);
-    setMessages([]);
+    /*  setMessages([]); */
   };
 
+  const changeMessageDisplay = (handle) => {
+    setSingleChatMessages(messages.find((m) => m.userHandle === handle));
+  };
   const scrollToBottom = () => {
     messagesEndRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -64,7 +63,38 @@ const Chatbox = () => {
       : `${handle}-${user.handle}`;
 
   useEffect(() => {
-    newMessage && setMessages([...messages, newMessage]);
+    if (newMessage) {
+      let userChat = messages?.find(
+        (user) =>
+          user.userHandle === newMessage.receiver ||
+          user.userHandle === newMessage.sender
+      );
+      if (userChat) {
+        const X = messages?.map((m) => {
+          if (
+            m.userHandle !== newMessage.receiver &&
+            m.userHandle !== newMessage.sender
+          )
+            return m;
+          return {
+            userHandle: m.userHandle,
+            messages: [...m.messages, newMessage],
+          };
+        });
+        setMessages(X);
+      } else {
+        setMessages([
+          ...messages,
+          {
+            userHandle:
+              newMessage.receiver === user.handle
+                ? newMessage.sender
+                : newMessage.receiver,
+            messages: [newMessage],
+          },
+        ]);
+      }
+    }
   }, [newMessage]);
 
   useEffect(() => {
@@ -120,6 +150,7 @@ const Chatbox = () => {
                 onClick={() => {
                   joinRoom(friend.handle);
                   setCurrentFriend(friend);
+                  changeMessageDisplay(friend.handle);
                 }}
               >
                 <div className="friend-status-container">
@@ -140,9 +171,11 @@ const Chatbox = () => {
           <div className="friend-private-chat">
             {currentFriend && <Friend friend={currentFriend} />}
             <div className="messages">
-              {messages.map((msg) => (
-                <ChatMessage msg={msg} user={user} key={msg.id} />
-              ))}
+              {messages
+                .find((user) => user.userHandle === currentFriend?.handle)
+                ?.messages?.map((msg) => (
+                  <ChatMessage msg={msg} user={user} key={msg.id} />
+                ))}
               <div ref={messagesEndRef} />
             </div>
             {room && (
@@ -170,7 +203,7 @@ const Chatbox = () => {
                 <input
                   type="file"
                   onChange={(e) => {
-                    toDataURL(e.target.files[0]);
+                    toDataURL(e.target.files[0], setFile);
                   }}
                   ref={inputFile}
                   accept="image/png, image/jpeg"

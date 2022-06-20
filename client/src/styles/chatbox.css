@@ -3,7 +3,8 @@
     padding: 15px;
 
     margin-top: 1.7%;
-    height: 75vh;
+    height: fit-content;
+    overflow: hidden;
 }
 
 .friend-private-chat{

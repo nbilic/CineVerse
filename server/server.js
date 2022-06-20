@@ -60,12 +60,13 @@ io.on("connection", async (socket) => {
   socket.on("join-room", (room) => {
     socket.join(room);
   });
-  socket.on("pm-out", ({ room, msg, sender, file }) => {
+  socket.on("pm-out", ({ room, msg, sender, file, receiver }) => {
     const user = onlineUsers.find((u) => u._id === room);
-    io.to(user.socketId).to(socket.id).emit("pm", {
+    io.to(user?.socketId).to(socket.id).emit("pm", {
       content: msg,
       id: uuidv4(),
       sender,
+      receiver,
       file,
     });
   });
