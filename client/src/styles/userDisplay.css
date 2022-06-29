@@ -2,20 +2,24 @@
     display: flex;
     align-items: center;
     padding: 20px;
-    background-color: white;
+    background-color: var(--bgColor);
     margin-top: 3%;
     border-radius: 3%;
     border:0px solid rgb(226, 226, 226);
+    color:var(--primary);
+    
+    
 }
 
 .user-display-card .user-avatar{
     height: 50px;
     width:50px;
+   
 }
 
 .user-details{
-    margin-left: 10px;
- 
+  
+    padding: 4px;
 }
 
 .user-name{
@@ -30,3 +34,5 @@
 .user-avatar:hover,.user-name:hover,.user-handle:hover{
     cursor: pointer;
 }
+
+

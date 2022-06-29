@@ -1,0 +1,22 @@
+.about-me{
+    background-color: var(--bgColor);
+    padding: 20px;
+    color:var(--primary);
+    display: flex;
+    font-size: 1.2em;
+}
+
+.left-side,.right-side{
+    
+    width: 50%;
+}
+
+.pair p{
+    font-size: .8em;
+    
+}
+
+.pair{
+    padding: 10px;
+}
+

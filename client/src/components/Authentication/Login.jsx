@@ -68,7 +68,7 @@ const Login = ({ setLogin }) => {
       </form>
 
       <div className="login-subtext">
-        Don't have an account? {user?.firstName}
+        Don't have an account?
         <div className="redirect" onClick={() => setLogin(false)}>
           Register
         </div>

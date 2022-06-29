@@ -13,7 +13,7 @@
 
 .layers{
     width: 30%;
-    height: 75%;
+    height: fit-content;
     border:1px solid rgb(0, 0, 0);
     overflow-y: auto;
     background-color: white;

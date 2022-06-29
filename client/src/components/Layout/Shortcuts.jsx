@@ -23,13 +23,13 @@ const Shortcuts = () => {
     <div className="shortcuts">
       <h5>Shortcuts</h5>
       <ul>
-        <li>
+        <li onClick={() => navigate("/")}>
           {" "}
           <HiOutlineClipboardList className="shortcut-icons" /> Timeline
         </li>
-        <li>
+        <li onClick={() => navigate("/movies")}>
           {" "}
-          <BiNews className="shortcut-icons" /> News
+          <BiNews className="shortcut-icons" /> Movies
         </li>
         <li>
           <HiUserGroup className="shortcut-icons" /> Forum

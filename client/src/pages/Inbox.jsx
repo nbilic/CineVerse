@@ -8,11 +8,6 @@ const Inbox = () => {
     <div className="inbox">
       <Navbar />
       <div className="main-content grid-container">
-        <div className="sidebar">
-          <UserDisplay />
-          <Shortcuts />
-        </div>
-
         <Chatbox />
       </div>
     </div>

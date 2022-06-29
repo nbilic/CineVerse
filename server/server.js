@@ -15,6 +15,7 @@ dotenv.config();
 const authRoute = require("./routes/authRoute");
 const postRoute = require("./routes/postRoute");
 const userRoute = require("./routes/userRoute");
+const movieRoute = require("./routes/moviesRoute");
 const app = express();
 
 const server = http.createServer(app);
@@ -46,6 +47,7 @@ app.use(deserializeUser);
 app.use("/auth", authRoute);
 app.use("/api/post", postRoute);
 app.use("/api/user", userRoute);
+app.use("/api/movie", movieRoute);
 const PORT = process.env.PORT || 8080;
 
 let onlineUsers = [];

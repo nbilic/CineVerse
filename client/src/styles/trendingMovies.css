@@ -1,0 +1,36 @@
+.movies{
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: center;
+   
+}
+
+.trending-movies-container{
+    margin-top: 1.7%;
+    color: var(--primary)
+}
+
+.trending-movies-container h3 {
+    display: flex;
+    align-items: center;
+    margin-left: 1%;
+}
+.trending-button{
+    padding: 5px;
+    background-color: var(--bgColor);
+    border:0px;
+    color:var(--primary);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.trending-buttons{
+    margin-left: 10px;
+}
+
+.trending-button:hover{
+    cursor: pointer;
+}
+.active{
+    color:var(--niceGreen)
+}

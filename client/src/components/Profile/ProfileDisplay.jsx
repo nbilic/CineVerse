@@ -1,6 +1,12 @@
 import "../../styles/profileDisplay.css";
 import { GoLocation, GoCalendar } from "react-icons/go";
 import { AiOutlineLink, AiOutlineMessage } from "react-icons/ai";
+import { CgNotes } from "react-icons/cg";
+import { FiBook } from "react-icons/fi";
+import { FaUserFriends } from "react-icons/fa";
+import { HiUserGroup } from "react-icons/hi";
+import { BiMoviePlay } from "react-icons/bi";
+import { ImImages } from "react-icons/im";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useManageFriends from "../../hooks/useManageFriends";
@@ -11,7 +17,16 @@ import EditProfileModal from "./EditProfileModal";
 import FriendsInCommon from "./FriendsInCommon";
 import ImageModal from "../Modals/ImageModal";
 
-const ProfileDisplay = ({ profile }) => {
+const [ACTIVITY, ABOUTME, FRIENDS, GROUPS, MOVIES, MEDIA] = [
+  "ACTIVITY",
+  "ABOUTME",
+  "FRIENDS",
+  "GROUPS",
+  "MOVIES",
+  "MEDIA",
+];
+
+const ProfileDisplay = ({ profile, setTab }) => {
   const { user } = useSelector((state) => state.user);
   const [buttonText, setButtonText] = useState("");
   const [friendsWithUser, setFriendsWithUser] = useState(false);
@@ -112,7 +127,10 @@ const ProfileDisplay = ({ profile }) => {
             className="profile-avatar"
             onClick={() => editImageModal(profile?.avatar)}
           />
-
+          <div className="profile-info-stuff">
+            <h5 className="profile-name">{`${profile?.fullName}`}</h5>
+            <p className="profile-handle">{`@${profile?.handle}`}</p>
+          </div>
           <div className="user-interactions">
             {friendsWithUser && (
               <AiOutlineMessage className="send-message-icon" />
@@ -128,7 +146,35 @@ const ProfileDisplay = ({ profile }) => {
             </button>
           </div>
         </div>
-        <h5 className="profile-name">{`${profile?.fullName}`}</h5>
+
+        <ul className="profile-tabs">
+          <li onClick={() => setTab(ACTIVITY)}>
+            <CgNotes className="profile-icon" />
+            <span>Activity</span>
+          </li>
+          <li onClick={() => setTab(ABOUTME)}>
+            <FiBook className="profile-icon" />
+            <span>About me</span>
+          </li>
+          <li onClick={() => setTab(FRIENDS)}>
+            <FaUserFriends className="profile-icon" />
+            <span>Friends</span>
+          </li>
+          <li onClick={() => setTab(GROUPS)}>
+            <HiUserGroup className="profile-icon" />
+            <span>Groups</span>
+          </li>
+          <li onClick={() => setTab(MOVIES)}>
+            <BiMoviePlay className="profile-icon" />
+            <span>Movies</span>
+          </li>
+          <li onClick={() => setTab(MEDIA)}>
+            <ImImages className="profile-icon" />
+            <span>Media</span>
+          </li>
+        </ul>
+
+        {/*   <h5 className="profile-name">{`${profile?.fullName}`}</h5>
         <p className="profile-handle">{`@${profile?.handle}`}</p>
         <p className="profile-bio">{profile?.bio}</p>
         <div className="profile-personal-info">
@@ -152,8 +198,7 @@ const ProfileDisplay = ({ profile }) => {
         </div>
         {
           <div className="profile-stats">
-            {/* <p className="stat">{user.friends?.length} Friends</p>
-            <p className="stat">{user.posts?.length} Posts</p> */}
+        
             {user._id !== profile._id && (
               <p
                 className="stat"
@@ -163,7 +208,7 @@ const ProfileDisplay = ({ profile }) => {
               } in common`}</p>
             )}
           </div>
-        }
+        } */}
       </div>
     </div>
   );

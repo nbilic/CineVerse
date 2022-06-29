@@ -1,14 +1,14 @@
 .friend-invites-container{
-    background-color: white;
+    background-color: var(--bgColor);
     padding: 15px;
     width: 100%;
     height: fit-content;
     max-height: 500px;
     overflow-y: auto;
     margin-top: 3%;
-    border:1px solid rgb(226, 226, 226);
+    border:0px solid rgb(226, 226, 226);
     font-size: 1.05em;
-    color:#575B5F;
+    color:var(--primary);
     border-radius: 3%;
    
 }
@@ -52,7 +52,8 @@
 }
 
 .denie-button{
-    background-color: crimson;
+   background-color: rgb(8, 141, 205);
+    
 }
 
 .right-side button:hover{

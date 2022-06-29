@@ -1,39 +1,31 @@
-const users = [1, 3, 4, 7];
-const friends = [2, 3, 4, 5, 6];
-let onlineFriends = [];
-
-users.forEach((u) => {
-  friends.forEach((f) => {
-    f === u && onlineFriends.push(f);
-  });
-});
-
-//console.log(onlineFriends);
-
-const messages = [
-  { userId: 123, messages: [1, 2, 3] },
-  { userId: 90, messages: [9, 0] },
-  { userId: 212, messages: [2, 1, 2] },
+const A = [
+  "Beacon1",
+  "37",
+  "Beacon2",
+  "45",
+  "Beacon3",
+  "23",
+  "Beacon4",
+  "30",
+  "Beacon1",
+  "100",
+  "Beacon4",
+  "99",
 ];
-messages.map((m) => console.log(m.userId));
 
-const UID = 1234;
+const groupBeacons = (A) => {
+  let i = 0;
+  const grupirano = [];
+  while (i < A.length) {
+    let elementExists = grupirano.find((x) => x.name === A[i]);
+    !elementExists
+      ? grupirano.push({ name: A[i++], rssi: [A[i]] })
+      : elementExists.rssi.push(A[++i]);
+    ++i;
+  }
+  return grupirano;
+};
 
-let userChat = messages.find((m) => m.userId === UID);
+const grupirano = groupBeacons(A);
 
-//console.log(userChat);
-
-if (userChat) {
-  userChat.messages = [...userChat.messages, 111];
-} else {
-  messages.push({ userId: UID, messages: ["hello"] });
-}
-
-//console.log(userChat);
-//console.log(`\n${messages.map((m) => console.log(m))}`);
-
-console.log("\n");
-messages.map((m) => console.log(m));
-console.log("\n");
-console.log("\n");
-console.log(messages[{ userId: "123" }]);
+console.log(grupirano);

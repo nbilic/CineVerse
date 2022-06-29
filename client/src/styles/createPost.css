@@ -1,18 +1,18 @@
 .create-post-div {
     width: 100%;
     margin-top: 1.7%;
-    background-color: #fff;
-    border-radius: 2%;
+    background-color: var(--bgColor);
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     height: fit-content;
     padding: 10px;;
     flex-direction: column;
-    border-top: 0px solid red;
+    border:0px solid var(--primary)
 }
 
 .container{
-    display: flex;
+display: flex;
     align-items: center;
 }
 .user-img {
@@ -31,8 +31,11 @@
     position: relative;
     width: 90%;
     border: 0px solid rgb(184, 184, 184);
+    border-radius: 5px;
+    padding: 5px;
     display: flex;
     align-items: center;
+   
     
 }
 
@@ -40,11 +43,12 @@
     resize: none;
     outline: none;
     width: 90%;
-    color:rgb(97, 96, 96);
+    color:var(--primary);
     padding: 10px;
     border: 0px solid rgb(184, 184, 184);
     overflow-wrap: break-word;
     height: 50px;
+    background-color: var(--bgColor);
 }
 
 .post-menu {
@@ -53,11 +57,13 @@
     justify-content: flex-end;
     align-items: center;
     padding-top: 10px;
+    
 }
 
 .post-menu .menu-item {
     font-size: 16px;
     margin: 3px 7px;
+    
 }
 
 .post-menu .post-button {
@@ -104,7 +110,7 @@
 
 .post-box .post-icon{
     font-size: 1.5em;
-    color:rgb(97, 96, 96);
+    color:white;
     margin: 0px 5px;
 }
 

@@ -1,13 +1,12 @@
 .post-card{
     height: fit-content;
-    background-color: white;
+    background-color: var(--bgColor);
     margin-top: 1.7%;
-    color:#575B5F;
+    color:var(--primary);
     padding: 20px;
     margin-bottom: 3%;
-    border-radius: 1%;
-    background-color: white;
-    border:1px solid rgb(226, 226, 226);
+    border-radius: 0%;
+    border:0px solid rgb(226, 226, 226);
 }
 
 
@@ -23,7 +22,7 @@
     align-items: center;
     margin: 0px 10px 10px 10px;
     padding-bottom: 2%;
-    border-bottom: 1px solid rgb(226, 226, 226);
+    border-bottom: 0px solid rgb(226, 226, 226);
 }
 
 .post-details > p {
@@ -69,7 +68,7 @@
     width: 100%;
     justify-content: space-around;
    /*  border-top: 1px solid rgb(226, 226, 226);  */
-    border-bottom: 1px solid rgb(226, 226, 226);
+    border-bottom: 0px solid rgb(226, 226, 226);
     margin-top: 2%;
 }
 

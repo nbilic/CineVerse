@@ -1,15 +1,14 @@
 .friends-display{
-    background-color: white;
+    background-color: var(--bgColor);
     padding: 15px;
     width: 100%;
     height: fit-content;
     min-height: 60px;
-    margin-top: 3%;
-    border:1px solid rgb(226, 226, 226);
+    border:0px solid rgb(226, 226, 226);
     font-size: 1.05em;
-    color:#575B5F;
+    color:var(--primary);
 
-    border-radius: 3%;
+
 }
 
 .friends-display ul li{
@@ -44,4 +43,8 @@
 
 .name-handle:hover,.friend-avatar:hover,.friend-handle:hover{
     cursor: pointer;
+}
+
+.friend-li{
+    border-bottom: 1px solid var(--secondary);
 }

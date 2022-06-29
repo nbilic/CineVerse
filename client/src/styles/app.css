@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,500,700,800');
 @import url('https://fonts.googleapis.com/css?family=Satisfy');
 
-
+:root{
+    --bgColor: #212c38;
+    --primary: #f0ede9;
+    --secondary:#2c3947;
+    --niceGreen: #30F5C8;
+}
 
 *{
     margin: 0;
@@ -16,7 +21,7 @@
 .App{
     min-height: 100vh;
     border:0px solid red;
-    background-color: #f1f1f1;
+    background-color: var(--secondary);
     
  }
 

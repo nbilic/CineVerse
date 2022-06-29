@@ -34,7 +34,7 @@
     position: relative;
     border-radius: 4px;
     padding-left: 10px;
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     overflow-wrap: break-word;
 }
 
@@ -43,7 +43,7 @@
     height: 0; 
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent; 
-    border-right:12px solid #F1F1F1;
+    border-right:12px solid var(--secondary);;
     top: 13px;
     left: -12px;
     position: absolute;
@@ -54,7 +54,7 @@
     height: 0; 
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent; 
-    border-right:10px solid #F1F1F1;
+    border-right:10px solid var(--secondary);;
     top: 15px;
     left: -10px;
     position: absolute;

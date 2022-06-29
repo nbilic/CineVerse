@@ -9,9 +9,9 @@ import { useState, useEffect } from "react";
 import FriendInvites from "../components/Friends/FriendInvites";
 import RecentUsers from "../components/Users/RecentUsers";
 import UserDisplay from "../components/Layout/UserDisplay";
-import Loading from "../components/Loading";
 import api from "../api/api";
 import RotateLoader from "react-spinners/RotateLoader";
+import TrendingMovies from "../components/Movies/TrendingMovies";
 const Homepage = () => {
   const { user } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
@@ -42,7 +42,6 @@ const Homepage = () => {
     };
 
     user?._id && getPosts();
-    //!user?._id && setLoading(true);
   }, [user]);
 
   return (
@@ -50,16 +49,14 @@ const Homepage = () => {
       <Navbar />
 
       <div className="main-content grid-container">
-        <div className="grid-item sidebar">
-          <UserDisplay />
-          <Shortcuts />
-          <RecentUsers />
-        </div>
+        {/* <div className="grid-item sidebar">
+         <UserDisplay />
+          <Shortcuts /> 
+         <RecentUsers /> 
+        </div> */}
 
         <div className="center grid-item">
           <CreatePost addNewPost={addNewPost} />
-          {/* {loading && <Loading />} */}
-
           {loading && (
             <div className="loader-container">
               <RotateLoader
@@ -81,10 +78,10 @@ const Homepage = () => {
           ))}
         </div>
 
-        <div className="grid-item sidebar">
+        {/*   <div className="grid-item sidebar">
           <FriendInvites />
           <FriendsDisplay />
-        </div>
+        </div> */}
       </div>
     </div>
   );

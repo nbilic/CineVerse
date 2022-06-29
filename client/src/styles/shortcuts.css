@@ -1,13 +1,12 @@
-.shortcuts{
-    background-color: white;
+/* .shortcuts{
+    background-color: var(--bgColor);
     padding: 15px;
     height: fit-content;
     margin-top: 3%;
-    border:1px solid rgb(226, 226, 226);
+    border:0px solid var(--primary);
     font-size: 1.05em;
-    color:#575B5F;
+    color:var(--primary);
     border-radius: 3%;
-    border:0px solid red
 }
 
 .shortcuts > ul {
@@ -39,5 +38,4 @@
     text-transform: uppercase;
     padding-bottom: 10px;
     font-size: 1.05em;
-    color:#3f4244
-}
+} */

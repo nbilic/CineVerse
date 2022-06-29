@@ -1,0 +1,43 @@
+.actor-image{
+    height: 180px;
+    max-width: 120px;
+}
+.actor-card{
+    width: 100%;
+    text-overflow: ellipsis;
+    margin: 10px;
+}
+
+.actor-card h5{
+    max-width: 120px;
+    text-overflow: ellipsis;
+}
+
+.actor-card h4{
+    max-width: 120px;
+}
+
+.cast{
+    display: flex;
+     margin: auto;
+    color:var(--primary)
+}
+
+.cast-container > h4{
+    display: block;
+    font-size: 1.8em;
+    color:var(--primary);
+    margin-top: 10px;
+}
+
+.cast-container{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    margin: auto;
+}
+
+.default{
+    object-fit: cover;
+}

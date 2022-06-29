@@ -17,6 +17,10 @@ import SinglePost from "./pages/SinglePost";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Inbox from "./pages/Inbox";
+import TrendingMoviesPage from "./pages/TrendingMoviesPage";
+import SingleMovie from "./pages/SingleMovie";
+import UpcomingMovies from "./pages/UpcomingMovies";
+import SearchMovies from "./pages/SearchMovies";
 
 const App = () => {
   const { user } = useSelector((state) => state.user);
@@ -59,9 +63,9 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <button onClick={() => console.log(getPath())}>TEST</button>
-      <p>{location.pathname}</p>
-      {friends.map((f) => (
+      {/*  <button onClick={() => console.log(getPath())}>TEST</button> */}
+      {/*  <p>{location.pathname}</p> */}
+      {/* {friends.map((f) => (
         <p key={f.socketId}>{`_id: ${f._id} socketId: ${f.socketId}`}</p>
       ))} */}
       {/* {user && <EditProfileModal user={user} />} */}
@@ -71,6 +75,10 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/chat" element={<Inbox />} />
+          <Route path="/movies/trending" element={<TrendingMoviesPage />} />
+          <Route path="/movies/upcoming" element={<UpcomingMovies />} />
+          <Route path="/movies/search" element={<SearchMovies />} />
+          <Route path="/movies/:id" element={<SingleMovie />} />
           <Route path="/post/:id" element={<SinglePost />} />
           <Route path="/profile/:handle" element={<Profile />} />
         </Route>

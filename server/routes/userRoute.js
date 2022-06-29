@@ -25,7 +25,8 @@ router.get("/users", async (req, res) => {
     const users = await Promise.all(
       req.query.users.map(async (userId) => {
         const user = await User.findById(userId);
-        const { firstName, lastName, avatar, handle, _id, fullName } = user;
+        const { firstName, lastName, avatar, handle, _id, fullName, banner } =
+          user;
 
         return {
           firstName,
@@ -34,6 +35,7 @@ router.get("/users", async (req, res) => {
           _id,
           handle,
           fullName,
+          banner,
         };
       })
     );

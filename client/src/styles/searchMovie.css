@@ -1,0 +1,27 @@
+.search-movies-container .searchbar{
+    width: 100%;
+    border:0px solid red;
+    background-color: var(--bgColor);
+    margin: 0% auto;
+    min-height: 120px;
+    padding: 20px;
+    border-radius: 0px;
+}
+
+.searchbar h4{
+    color:var(--primary);
+    font-size: 1.3em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.searchbar input{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--secondary);
+    border:0px;
+    margin-top: 10px;
+    color:var(--primary);
+    outline: none;
+}
+
