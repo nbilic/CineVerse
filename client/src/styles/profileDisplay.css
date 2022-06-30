@@ -12,22 +12,24 @@
 }
 
 .upper-container{
-    height: 400px;
+    height: 350px;
     overflow: hidden;
    
+    
 }
 
 .banner{
    width: 100%;
-   height: 100%;
-    object-fit: cover;
+  /*  height: 100%; */
+   object-fit: cover;
   
 }
 
 .bottom-container{
     /* background-color: #f1f1f1; */
     border:0px solid white;
-    padding:0px 30px;
+    padding:0px 30px 20px 0px;
+    border-bottom:1px solid rgba(20,20,20,0.5);
 }
 
 .banner:hover,.profile-avatar:hover{
@@ -41,17 +43,18 @@
     border:2px solid rgb(226, 226, 226);
     border-radius: 10px;
     object-fit:  cover;
-    margin-left: 10%;
+    margin-left: 1%;
 }
 .profile-cross-section{
    border:0px solid red;
    display: flex;
    align-items: center;
+   justify-content: space-evenly;
 }
 
 .user-interactions{
-    position: absolute;
-    right: 0;
+   /*  position: absolute;
+    /* right: 0; */
     align-self: center;
     display: flex;
     align-items: center;
@@ -143,8 +146,9 @@
 .profile-tabs{
     display: flex;
     list-style-type: none;
-    width: 100%;
+    
     justify-content: center;
+    border:0px solid red;
 }
 
 .profile-tabs li{

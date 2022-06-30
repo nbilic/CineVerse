@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const axios = require("axios");
+const User = require("../models/User");
+const Movie = require("../models/movie");
 const API_KEY = "58e6eb6950d2e03556ac2af37dd40921";
 const URL = "https://api.themoviedb.org/3";
 
@@ -63,6 +65,25 @@ const getGenres = async () => {
     console.log(error.message);
   }
 };
+
+// Get all movies from user
+router.get("/user/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    const userMovies = await Promise.all(
+      user.movies.map(async (movie) => {
+        const movieDB = await Movie.findById(movie);
+
+        return await getMovieById(movieDB.id);
+      })
+    );
+
+    res.status(200).json(userMovies);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
 
 // Get all genres
 router.get("/genres", async (req, res) => {

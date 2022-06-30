@@ -13,14 +13,16 @@ import Friends from "../components/Profile/Friends";
 import Groups from "../components/Profile/Groups";
 import Movies from "../components/Profile/Movies";
 import Media from "../components/Profile/Media";
+import Statistics from "../components/Profile/Statistics";
 
-const [ACTIVITY, ABOUTME, FRIENDS, GROUPS, MOVIES, MEDIA] = [
+const [ACTIVITY, ABOUTME, FRIENDS, GROUPS, MOVIES, MEDIA, STATS] = [
   "ACTIVITY",
   "ABOUTME",
   "FRIENDS",
   "GROUPS",
   "MOVIES",
   "MEDIA",
+  "STATS",
 ];
 
 const Profile = () => {
@@ -76,7 +78,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <Navbar />
-      {!loading && <ProfileDisplay profile={user} setTab={setTab} />}
+      {!loading && <ProfileDisplay profile={user} setTab={setTab} tab={tab} />}
       <div className="main-content grid-container">
         <div className="">
           {loading && (
@@ -87,11 +89,14 @@ const Profile = () => {
           {!loading && tab === ACTIVITY && (
             <Activity posts={posts} removePost={removePost} />
           )}
-          {!loading && tab === ABOUTME && <AboutMe />}
+          {!loading && tab === ABOUTME && <AboutMe user={user} />}
           {!loading && tab === FRIENDS && <Friends id={user._id} />}
           {!loading && tab === GROUPS && <Groups />}
-          {!loading && tab === MOVIES && <Movies />}
+          {!loading && tab === MOVIES && <Movies user={user} />}
           {!loading && tab === MEDIA && <Media />}
+          {!loading && tab === STATS && (
+            <Statistics posts={posts} user={user} />
+          )}
         </div>
       </div>
     </div>

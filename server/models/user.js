@@ -67,6 +67,10 @@ const userSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+    movies: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true }
 );

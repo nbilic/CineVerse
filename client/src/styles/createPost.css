@@ -1,14 +1,15 @@
 .create-post-div {
-    width: 100%;
-    margin-top: 1.7%;
+    width: 50%;
+    
     background-color: var(--bgColor);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     display: flex;
     justify-content: center;
     height: fit-content;
     padding: 10px;;
     flex-direction: column;
-    border:0px solid var(--primary)
+    border:0px solid var(--primary);
+    margin: 1.7% auto;
 }
 
 .container{

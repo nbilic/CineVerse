@@ -46,8 +46,9 @@ const Navbar = () => {
                   </div>
                 </li>
 
-                <li onClick={() => navigate("/insights")}>Insights</li>
-                <li onClick={() => navigate("/friends")}>Friends</li>
+                <li onClick={() => navigate(`/profile/${user.handle}`)}>
+                  PROFILE
+                </li>
               </ul>
             </div>
           </div>

@@ -1,50 +1,58 @@
-.friends-display{
-    background-color: var(--bgColor);
-    padding: 15px;
-    width: 100%;
-    height: fit-content;
-    min-height: 60px;
-    border:0px solid rgb(226, 226, 226);
-    font-size: 1.05em;
-    color:var(--primary);
-
-
+.friends-display {
+  background-color: var(--bgColor);
+  padding: 15px;
+  width: 100%;
+  height: fit-content;
+  min-height: 60px;
+  border: 0px solid rgb(226, 226, 226);
+  font-size: 1.05em;
+  color: var(--primary);
 }
 
-.friends-display ul li{
-    list-style: none;
-    display: flex;
-    align-items: center;
+.friends-display ul li {
+  list-style: none;
+  display: flex;
+  align-items: center;
 }
-.friend-avatar{
-    height: 48px;
-    width: 48px;
-    border-radius: 10px;
-    margin: 10px;
-    object-fit: cover;
-}
-
-.friends-display > input{
-    height: 32px;
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 10px;
+.friend-avatar {
+  height: 48px;
+  width: 48px;
+  border-radius: 10px;
+  margin: 10px;
+  object-fit: cover;
 }
 
-.friend-handle{
-    font-size: .8em;
+.friends-display > input {
+  height: 32px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.name-handle{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.friend-handle {
+  font-size: 0.8em;
 }
 
-.name-handle:hover,.friend-avatar:hover,.friend-handle:hover{
-    cursor: pointer;
+.name-handle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.friend-li{
-    border-bottom: 1px solid var(--secondary);
+.name-handle:hover,
+.friend-avatar:hover,
+.friend-handle:hover {
+  cursor: pointer;
+}
+
+.friend-li {
+  border-bottom: 1px solid var(--secondary);
+}
+
+.no-friends {
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
 }

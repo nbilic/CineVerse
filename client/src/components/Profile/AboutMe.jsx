@@ -1,12 +1,12 @@
 import "../../styles/aboutMe.css";
 
-const AboutMe = () => {
+const AboutMe = ({ user }) => {
   return (
     <div className="about-me">
       <div className="left-side">
         <div className="pair">
           <h5>Name: </h5>
-          <p>Nikola Bilić</p>
+          <p>{user.fullName}</p>
         </div>
         <div className="pair">
           <h5>Age: </h5>
@@ -14,7 +14,7 @@ const AboutMe = () => {
         </div>
         <div className="pair">
           <h5>Location: </h5>
-          <p>Split, Croatia</p>
+          <p>{user.location}</p>
         </div>
         <div className="pair">
           <h5>Favorite movie:</h5>
@@ -28,12 +28,7 @@ const AboutMe = () => {
       <div className="right-side">
         <div className="pair">
           <h5>About me: </h5>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
-            corrupti earum porro optio possimus quod iure est! Ducimus incidunt
-            ex accusamus sunt, iure quibusdam reiciendis dolorem accusantium
-            numquam reprehenderit nostrum.
-          </p>
+          <p>{user.bio || "N/A"}</p>
         </div>
       </div>
       <div className="bottom"></div>

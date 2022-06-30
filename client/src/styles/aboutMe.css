@@ -4,11 +4,13 @@
     color:var(--primary);
     display: flex;
     font-size: 1.2em;
+    justify-content: center;
+    
 }
 
 .left-side,.right-side{
     
-    width: 50%;
+    width: 25%;
 }
 
 .pair p{

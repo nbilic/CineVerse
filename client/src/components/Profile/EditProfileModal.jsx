@@ -160,15 +160,7 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
               value={newValues.handle}
               onChange={onChange}
             />
-            <label>Bio</label>
-            <input
-              type="text"
-              label="Bio"
-              placeholder="Bio"
-              name="bio"
-              value={newValues.bio}
-              onChange={onChange}
-            />
+
             <label>Location</label>
             <input
               type="text"
@@ -178,13 +170,40 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
               value={newValues.location}
               onChange={onChange}
             />
-            <label>Link</label>
+            <label>Birthday</label>
+            <input
+              type="date"
+              label="Link"
+              name="link"
+              placeholder="Link"
+              value={newValues.link}
+              onChange={onChange}
+            />
+            <label>Favorite Movie</label>
             <input
               type="text"
               label="Link"
               name="link"
               placeholder="Link"
               value={newValues.link}
+              onChange={onChange}
+            />
+            <label>Favorite Genres</label>
+            <input
+              type="text"
+              label="Link"
+              name="link"
+              placeholder="Link"
+              value={newValues.link}
+              onChange={onChange}
+            />
+            <label>Bio</label>
+            <input
+              type="text"
+              label="Bio"
+              placeholder="Bio"
+              name="bio"
+              value={newValues.bio}
               onChange={onChange}
             />
           </form>

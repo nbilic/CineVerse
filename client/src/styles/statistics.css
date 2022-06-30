@@ -1,0 +1,13 @@
+.posts-chart {
+  width: 40%;
+}
+
+.movies-chart {
+  width: 40%;
+}
+
+.statistics-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

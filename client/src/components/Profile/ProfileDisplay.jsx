@@ -3,6 +3,7 @@ import { GoLocation, GoCalendar } from "react-icons/go";
 import { AiOutlineLink, AiOutlineMessage } from "react-icons/ai";
 import { CgNotes } from "react-icons/cg";
 import { FiBook } from "react-icons/fi";
+import { IoStatsChart } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
 import { HiUserGroup } from "react-icons/hi";
 import { BiMoviePlay } from "react-icons/bi";
@@ -17,16 +18,17 @@ import EditProfileModal from "./EditProfileModal";
 import FriendsInCommon from "./FriendsInCommon";
 import ImageModal from "../Modals/ImageModal";
 
-const [ACTIVITY, ABOUTME, FRIENDS, GROUPS, MOVIES, MEDIA] = [
+const [ACTIVITY, ABOUTME, FRIENDS, GROUPS, MOVIES, MEDIA, STATS] = [
   "ACTIVITY",
   "ABOUTME",
   "FRIENDS",
   "GROUPS",
   "MOVIES",
   "MEDIA",
+  "STATS",
 ];
 
-const ProfileDisplay = ({ profile, setTab }) => {
+const ProfileDisplay = ({ profile, setTab, tab }) => {
   const { user } = useSelector((state) => state.user);
   const [buttonText, setButtonText] = useState("");
   const [friendsWithUser, setFriendsWithUser] = useState(false);
@@ -121,16 +123,70 @@ const ProfileDisplay = ({ profile, setTab }) => {
 
       <div className="bottom-container">
         <div className="profile-cross-section">
-          <img
-            src={profile?.avatar}
-            alt=""
-            className="profile-avatar"
-            onClick={() => editImageModal(profile?.avatar)}
-          />
-          <div className="profile-info-stuff">
-            <h5 className="profile-name">{`${profile?.fullName}`}</h5>
-            <p className="profile-handle">{`@${profile?.handle}`}</p>
+          <div>
+            <img
+              src={profile?.avatar}
+              alt=""
+              className="profile-avatar"
+              onClick={() => editImageModal(profile?.avatar)}
+            />
+            <div className="profile-info-stuff">
+              <h5 className="profile-name">{`${profile?.fullName}`}</h5>
+              <p className="profile-handle">{`@${profile?.handle}`}</p>
+            </div>
           </div>
+
+          <ul className="profile-tabs">
+            <li
+              onClick={() => setTab(ACTIVITY)}
+              className={`${tab === ACTIVITY && "active"}`}
+            >
+              <CgNotes className="profile-icon" />
+              <span>Activity</span>
+            </li>
+            <li
+              onClick={() => setTab(ABOUTME)}
+              className={`${tab === ABOUTME && "active"}`}
+            >
+              <FiBook className="profile-icon" />
+              <span>About me</span>
+            </li>
+            <li
+              onClick={() => setTab(FRIENDS)}
+              className={`${tab === FRIENDS && "active"}`}
+            >
+              <FaUserFriends className="profile-icon" />
+              <span>Friends</span>
+            </li>
+            <li
+              onClick={() => setTab(GROUPS)}
+              className={`${tab === GROUPS && "active"}`}
+            >
+              <HiUserGroup className="profile-icon" />
+              <span>Groups</span>
+            </li>
+            <li
+              onClick={() => setTab(MOVIES)}
+              className={`${tab === MOVIES && "active"}`}
+            >
+              <BiMoviePlay className="profile-icon" />
+              <span>Movies</span>
+            </li>
+            <li
+              onClick={() => setTab(MEDIA)}
+              className={`${tab === MEDIA && "active"}`}
+            >
+              <ImImages className="profile-icon" />
+              <span>Media</span>
+            </li>
+            <li
+              onClick={() => setTab(STATS)}
+              className={`${tab === STATS && "active"}`}
+            >
+              <IoStatsChart className="profile-icon" />
+              <span>Stats</span>
+            </li>
+          </ul>
           <div className="user-interactions">
             {friendsWithUser && (
               <AiOutlineMessage className="send-message-icon" />
@@ -146,69 +202,6 @@ const ProfileDisplay = ({ profile, setTab }) => {
             </button>
           </div>
         </div>
-
-        <ul className="profile-tabs">
-          <li onClick={() => setTab(ACTIVITY)}>
-            <CgNotes className="profile-icon" />
-            <span>Activity</span>
-          </li>
-          <li onClick={() => setTab(ABOUTME)}>
-            <FiBook className="profile-icon" />
-            <span>About me</span>
-          </li>
-          <li onClick={() => setTab(FRIENDS)}>
-            <FaUserFriends className="profile-icon" />
-            <span>Friends</span>
-          </li>
-          <li onClick={() => setTab(GROUPS)}>
-            <HiUserGroup className="profile-icon" />
-            <span>Groups</span>
-          </li>
-          <li onClick={() => setTab(MOVIES)}>
-            <BiMoviePlay className="profile-icon" />
-            <span>Movies</span>
-          </li>
-          <li onClick={() => setTab(MEDIA)}>
-            <ImImages className="profile-icon" />
-            <span>Media</span>
-          </li>
-        </ul>
-
-        {/*   <h5 className="profile-name">{`${profile?.fullName}`}</h5>
-        <p className="profile-handle">{`@${profile?.handle}`}</p>
-        <p className="profile-bio">{profile?.bio}</p>
-        <div className="profile-personal-info">
-          {profile?.location && (
-            <div>
-              <GoLocation /> <p>{profile?.location}</p>
-            </div>
-          )}
-          {profile?.link && (
-            <div>
-              <AiOutlineLink />
-              <a href={`https://${profile?.link}`}>
-                <p>{profile?.link}</p>
-              </a>
-            </div>
-          )}
-          <div>
-            <GoCalendar />
-            <p>Joined {new Date(profile?.createdAt).toLocaleDateString()}</p>
-          </div>
-        </div>
-        {
-          <div className="profile-stats">
-        
-            {user._id !== profile._id && (
-              <p
-                className="stat"
-                onClick={toggleDisplayCommonFriends}
-              >{`You have ${commonFriends.length} friend${
-                commonFriends.length === 1 ? "" : "s"
-              } in common`}</p>
-            )}
-          </div>
-        } */}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .profile{
-    background-color: var(--secondary);
+    background-color: var(--bgColor);
     min-height: 100vh;
     position: relative;
     border:0px solid red;

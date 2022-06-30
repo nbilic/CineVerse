@@ -34,7 +34,9 @@ const Friends = ({ id }) => {
       {!loading && (
         <>
           {/* <input type="text" placeholder="Search Friends..." /> */}
-          {!friends.length && <p>You have no friends</p>}
+          {!friends.length && (
+            <p className="no-friends">This user has no friends </p>
+          )}
           <ul>
             {friends.map((friend) => (
               <Friend key={friend._id} friend={friend} />

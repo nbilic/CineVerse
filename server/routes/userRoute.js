@@ -2,9 +2,21 @@ const User = require("../models/User");
 const router = require("express").Router();
 const { requireUser } = require("../middleware/requireUser");
 const { remove } = require("../models/User");
+const Movie = require("../models/movie");
 
 const checkIfUserHasAuthorizedAcces = (loggedInEmail, email) =>
   loggedInEmail === email;
+
+const getAllMoviesFromUser = async (user) => {
+  try {
+    const movies = await Promise.all(
+      await user.movies.map(async (movie) => await Movie.findById(movie))
+    );
+    return movies;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 // Get a single user
 router.get("/single/:handle", async (req, res) => {
@@ -221,7 +233,7 @@ router.get("/friends/:id", async (req, res) => {
 });
 
 // Get requests
-router.get("/requests/:id", async (req, res) => {
+router.get("/requests/:id", requireUser, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const outgoing = await Promise.all(
@@ -243,8 +255,40 @@ router.get("/requests/:id", async (req, res) => {
   }
 });
 
+// Add a movie to movie collection
+router.put("/addmovie", requireUser, async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    if (!checkIfUserHasAuthorizedAcces(req.user.email, user.email))
+      return res.status(403).json("Unauthorized action!");
+
+    const movies = await getAllMoviesFromUser(user);
+    const ratedBefore = movies?.find((movie) => +movie.id === req.body.movieId);
+
+    if (ratedBefore) {
+      await Movie.findByIdAndUpdate(ratedBefore._id, {
+        $set: { rating: req.body.rating },
+      });
+    } else {
+      const newMovie = new Movie({
+        id: req.body.movieId,
+        rating: req.body.rating,
+        userId: req.body.userId,
+      });
+      await newMovie.save();
+      user.movies = [...user.movies, newMovie._id];
+      await user.save();
+    }
+
+    await res.status(200).json("OK");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 // Edit general user information
-router.put("/:id", async (req, res) => {
+router.put("/:id", requireUser, async (req, res) => {
   try {
     const { newBanner, newAvatar, ...other } = req.body;
 
@@ -267,4 +311,5 @@ router.put("/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
 module.exports = router;
