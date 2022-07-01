@@ -3,14 +3,21 @@ import { useEffect } from "react";
 import api from "../../api/api";
 import MovieCard from "../Movies/MovieCard";
 import "../../styles/movies.css";
+import RotateLoader from "react-spinners/RotateLoader";
+
 const Movies = ({ user }) => {
   const [genres, setGenres] = useState([]);
   const [originalMovieList, setOriginalMovieList] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectValue, setSelectValue] = useState("HMM");
   const [filters, setFilters] = useState([]);
+  const [currentFilterValue, setCurrentFilterValue] =
+    useState("Select a category");
 
   const handleChange = (e) => {
+    if (e.target.value === "") {
+    }
     const isFiltered = filters.find((x) => x === e.target.value);
     !isFiltered && setFilters([...filters, e.target.value]);
   };
@@ -20,12 +27,11 @@ const Movies = ({ user }) => {
   useEffect(() => {
     setMovies(
       originalMovieList.filter((movie) => {
-        let flag = false;
-        movie.genres.forEach((genre) => {
-          const genreExists = filters.find((x) => x === genre.name);
-          if (genreExists) flag = true;
+        let flag = true;
+        filters.forEach((filter) => {
+          const genreExists = movie.genres.find((x) => x.name === filter);
+          if (!genreExists) flag = false;
         });
-
         if (flag) return movie;
       })
     );
@@ -45,11 +51,14 @@ const Movies = ({ user }) => {
 
     const getUserMovies = async () => {
       try {
+        setLoading(true);
         const response = await api.get(`/api/movie/user/${user._id}`);
         setOriginalMovieList(response.data);
         setMovies(response.data);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setLoading(false);
       }
     };
     getGenres();
@@ -61,12 +70,18 @@ const Movies = ({ user }) => {
         <button className="filter-button">WATCHED</button>
         <button className="filter-button">WATCH LATER</button>
       </div> */}
+
       <div className="filter-by-genre">
         <form>
           <label>
             <h4>FILTER BY GENRE:</h4>
           </label>
-          <select name="genres" onChange={handleChange}>
+          <select
+            name="genres"
+            onChange={handleChange}
+            value={currentFilterValue}
+          >
+            <option value="">Select a category</option>
             {genres?.map((genre) => (
               <option key={genre.id} value={genre.name}>
                 {genre.name}
@@ -74,6 +89,11 @@ const Movies = ({ user }) => {
             ))}
           </select>
         </form>
+        {loading && (
+          <div className="loader-container">
+            <RotateLoader color="lightblue" size={10} loading={loading} />
+          </div>
+        )}
         <div className="filters-row">
           {filters.map((filter, i) => (
             <p

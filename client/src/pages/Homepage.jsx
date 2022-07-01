@@ -12,6 +12,8 @@ import UserDisplay from "../components/Layout/UserDisplay";
 import api from "../api/api";
 import RotateLoader from "react-spinners/RotateLoader";
 import TrendingMovies from "../components/Movies/TrendingMovies";
+import RecentActivity from "../components/Layout/RecentActivitiy";
+
 const Homepage = () => {
   const { user } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
@@ -49,33 +51,30 @@ const Homepage = () => {
       <Navbar />
 
       <div className="main-content grid-container">
-        {/* <div className="grid-item sidebar">
-         <UserDisplay />
-          <Shortcuts /> 
-         <RecentUsers /> 
-        </div> */}
-
         <div className="center grid-item">
-          <CreatePost addNewPost={addNewPost} />
-          {loading && (
-            <div className="loader-container">
-              <RotateLoader
-                color="lightblue"
-                size={10}
-                loading={loading}
-                margin="2"
-              />
-            </div>
-          )}
+          <div className="testa">
+            <CreatePost addNewPost={addNewPost} />
+            {loading && (
+              <div className="loader-container">
+                <RotateLoader
+                  color="lightblue"
+                  size={10}
+                  loading={loading}
+                  margin="2"
+                />
+              </div>
+            )}
 
-          {posts?.map((post) => (
-            <Post
-              key={post?.post._id}
-              post={post.post}
-              user={post.user}
-              removePost={removePost}
-            />
-          ))}
+            {posts?.map((post) => (
+              <Post
+                key={post?.post._id}
+                post={post.post}
+                user={post.user}
+                removePost={removePost}
+              />
+            ))}
+            <RecentActivity />
+          </div>
         </div>
 
         {/*   <div className="grid-item sidebar">

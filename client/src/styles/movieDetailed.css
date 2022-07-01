@@ -160,6 +160,16 @@
 .star {
   color: gold;
 }
+
+.dislike-icon {
+  font-size: 2.15em;
+  margin-left: 10px;
+}
+
+.dislike-icon:hover {
+  cursor: pointer;
+  color: crimson;
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 }

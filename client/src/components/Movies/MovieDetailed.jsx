@@ -1,28 +1,63 @@
 import "../../styles/movieDetailed.css";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+
+import { toast } from "react-toastify";
+
 import api from "../../api/api";
-import { useState } from "react";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
+import { FaHeartBroken } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 const POSTER_PATH = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
 const BACKDROP_PATH =
   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces";
 
 const MovieDetailed = ({ movie }) => {
+  const notify = (input) => toast.success(input, {});
   const { user } = useSelector((state) => state.user);
+  const [watched, setWatched] = useState(false);
   const handleRating = async (rating) => {
     try {
-      const response = await api.put("/api/user/addmovie", {
+      await api.put("/api/user/addmovie", {
         userId: user._id,
         movieId: movie.id,
         rating: rating,
       });
-      console.log(response.data);
+
+      !watched && notify("MOVIE ADDED TO COLLECTION");
+      watched && notify("MOVIE RATING UPDATED");
+      !watched && setWatched(true);
     } catch (error) {
       console.log(error.message);
     }
   };
+
+  const removeMovie = async () => {
+    try {
+      await api.delete(`/api/user/removemovie/${movie.id}`, {
+        params: { user: user._id },
+      });
+      setWatched(false);
+      notify("MOVIE REMOVED FROM COLLECTION");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    const checkIfWatched = async () => {
+      try {
+        const response = await api.get(`/api/user/watched/${movie.id}`, {
+          params: { user: user._id },
+        });
+        setWatched(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    checkIfWatched();
+  }, []);
   return (
     <div className="single-movie-container">
       <div className="backdrop-shadow" />
@@ -63,51 +98,34 @@ const MovieDetailed = ({ movie }) => {
           <div className="layer-3">
             <div className="user-score-outline"></div>
             <div className="user-score">
-              {Math.round(movie?.vote_average * 10)}
+              {Math.round(+movie.vote_average / 2)}/5
             </div>
             <h5>User Score</h5>
             <div className="movie-dropdown-menu">
               <AiFillHeart className="like-icon" />
               <div className="movie-dropdown-content">
                 <ul className="movie-dropdown">
-                  <li>
-                    <AiFillStar
-                      className="star"
-                      onClick={() => handleRating(1)}
-                    />
-                    1
+                  <li onClick={() => handleRating(1)}>
+                    <AiFillStar className="star" />1
                   </li>
-                  <li>
-                    <AiFillStar
-                      className="star"
-                      onClick={() => handleRating(2)}
-                    />{" "}
-                    2
+                  <li onClick={() => handleRating(2)}>
+                    <AiFillStar className="star" /> 2
                   </li>
-                  <li>
-                    <AiFillStar
-                      className="star"
-                      onClick={() => handleRating(3)}
-                    />{" "}
-                    3
+                  <li onClick={() => handleRating(3)}>
+                    <AiFillStar className="star" /> 3
                   </li>
-                  <li>
-                    <AiFillStar
-                      className="star"
-                      onClick={() => handleRating(4)}
-                    />{" "}
-                    4
+                  <li onClick={() => handleRating(4)}>
+                    <AiFillStar className="star" /> 4
                   </li>
-                  <li>
-                    <AiFillStar
-                      className="star"
-                      onClick={() => handleRating(5)}
-                    />{" "}
-                    5
+                  <li onClick={() => handleRating(5)}>
+                    <AiFillStar className="star" /> 5
                   </li>
                 </ul>
               </div>
             </div>
+            {watched && (
+              <FaHeartBroken className="dislike-icon" onClick={removeMovie} />
+            )}
           </div>
           <div className="layer-4">
             <p className="tagline">{movie?.tagline}</p>

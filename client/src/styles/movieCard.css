@@ -1,49 +1,82 @@
-.movie-card-container{
-    color:var(--primary); 
-    margin: 10px 5px;
+.movie-card-container {
+  color: var(--primary);
+  margin: 10px 5px;
 }
 
-.movie-card-upper{
-    width: 180px;
-
+.movie-card-upper {
+  width: 180px;
 }
 
-.movie-poster{
-    border-radius: 10px;
-    width: 100%;
+.movie-poster {
+  border-radius: 10px;
+  width: 100%;
 }
 
-.movie-rating{
-    border:2px solid rgb(16, 180, 51);
-    width: fit-content;
-    padding: 4px;
-    border-radius: 100%;
-    font-size: .7em;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    font-weight: bold;
-    margin-left: 10px;
-    background-color: var(--bgColor);
+.movie-rating {
+  border: 2px solid rgb(16, 180, 51);
+  width: fit-content;
+  padding: 4px;
+  border-radius: 100%;
+  font-size: 0.7em;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  margin-left: 10px;
+  background-color: var(--bgColor);
 }
 
-.movie-card-bottom{
-    margin-top: -25px;
-    max-width: 180px;
+.movie-card-bottom {
+  margin-top: -25px;
+  max-width: 180px;
 }
 
-.movie-card-bottom  h5{
-    font-weight: bold;
-    margin: 5px 0px;
+.movie-card-bottom h5 {
+  font-weight: bold;
+  margin: 5px 0px;
 }
 
 .movie-card-bottom p {
-    font-size: .8em;
+  font-size: 0.8em;
 }
 
-.movie-poster:hover,.movie-card-bottom > h5:hover{
-    cursor: pointer;
+.movie-poster:hover,
+.movie-card-bottom > h5:hover {
+  cursor: pointer;
+}
+
+.movie-rating-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.movie-user-rating {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.movie-rating-star {
+  font-size: 2.4em;
+
+  color: gold;
+}
+
+.movie-user-rating-number {
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--bgColor);
+  right: -14px;
+  bottom: -9px;
 }

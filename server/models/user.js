@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema(
     handle: {
       type: String,
       required: true,
+      unique: true,
     },
     fullName: {
       type: String,
@@ -46,7 +47,9 @@ const userSchema = new mongoose.Schema(
     location: {
       type: String,
     },
-    link: { type: String },
+    link: {
+      type: String,
+    },
     posts: {
       type: [String],
       default: [],
@@ -71,6 +74,11 @@ const userSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+    dob: {
+      type: Date,
+    },
+    favoriteMovie: String,
+    favoriteGenres: String,
   },
   { timestamps: true }
 );

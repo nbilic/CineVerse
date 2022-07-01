@@ -41,7 +41,6 @@ const getCastByMovieId = async (id) => {
     );
     return res.data;
   } catch (error) {
-    console.log("asd");
     console.log(error.message);
   }
 };
@@ -74,8 +73,9 @@ router.get("/user/:id", async (req, res) => {
     const userMovies = await Promise.all(
       user.movies.map(async (movie) => {
         const movieDB = await Movie.findById(movie);
+        const movieFromAPI = await getMovieById(movieDB.id);
 
-        return await getMovieById(movieDB.id);
+        return { ...movieFromAPI, rating: movieDB.rating };
       })
     );
 

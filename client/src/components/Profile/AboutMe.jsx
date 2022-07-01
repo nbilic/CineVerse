@@ -1,6 +1,11 @@
 import "../../styles/aboutMe.css";
 
 const AboutMe = ({ user }) => {
+  function calcAge(dateString = user.dob) {
+    const birthday = +new Date(dateString);
+
+    return ~~((Date.now() - birthday) / 31557600000);
+  }
   return (
     <div className="about-me">
       <div className="left-side">
@@ -10,7 +15,7 @@ const AboutMe = ({ user }) => {
         </div>
         <div className="pair">
           <h5>Age: </h5>
-          <p>26</p>
+          <p>{calcAge() || "N/A"}</p>
         </div>
         <div className="pair">
           <h5>Location: </h5>
@@ -18,11 +23,11 @@ const AboutMe = ({ user }) => {
         </div>
         <div className="pair">
           <h5>Favorite movie:</h5>
-          <p>Morbius</p>
+          <p>{user.favoriteMovie || "N/A"}</p>
         </div>
         <div className="pair">
           <h5>Favorite genres:</h5>
-          <p>Adventure, Fantasy</p>
+          <p>{user.favoriteGenres || "N/A"}</p>
         </div>
       </div>
       <div className="right-side">

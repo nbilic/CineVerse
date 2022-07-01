@@ -21,7 +21,10 @@ const getAllMoviesFromUser = async (user) => {
 // Get a single user
 router.get("/single/:handle", async (req, res) => {
   try {
-    const user = await User.find({ handle: req.params.handle });
+    const user = await User.find({ handle: req.params.handle }).collation({
+      locale: "en",
+      strength: 2,
+    });
     const { password, ...other } = user;
 
     res.status(200).json(other["0"]);
@@ -287,6 +290,44 @@ router.put("/addmovie", requireUser, async (req, res) => {
   }
 });
 
+// Remove movie from movie collection
+router.delete("/removemovie/:id", requireUser, async (req, res) => {
+  try {
+    const user = await User.findById(req.query.user);
+    if (!checkIfUserHasAuthorizedAcces(req.user.email, user.email))
+      return res.status(403).json("Unauthorized action!");
+
+    // FIND AND DELETE THE MOVIE FROM DB
+    const movie = await Movie.findOne({
+      id: req.params.id,
+      userId: req.query.user,
+    });
+    console.log(user.movies.length);
+    user.movies = user.movies.filter(
+      (m) => m.toString() !== movie._id.toString()
+    );
+    console.log(user.movies.length);
+    await user.save();
+    await movie.delete();
+    return res.status(200).json("OK");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+// Check if a user has a specific movie in his collection
+router.get("/watched/:id", requireUser, async (req, res) => {
+  try {
+    const user = await User.findById(req.query.user);
+    const movies = await getAllMoviesFromUser(user);
+    const isCollected = movies.find((movie) => movie.id === req.params.id);
+    return res.status(200).json(isCollected ? true : false);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json(error);
+  }
+});
 // Edit general user information
 router.put("/:id", requireUser, async (req, res) => {
   try {

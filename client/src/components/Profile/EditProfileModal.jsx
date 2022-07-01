@@ -16,11 +16,24 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
   const dispatch = useDispatch();
   const [newAvatar, setNewAvatar] = useState(null);
   const ref = useRef();
+
+  const convertDate = () => {
+    const date = new Date(user.dob);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDay() + 1;
+    return `${year}-${month < 10 ? "0" + month : month}-${
+      day < 10 ? "0" + day : day
+    }`;
+  };
+
   const [newValues, setNewValues] = useState({
     handle: user.handle || "",
     bio: user.bio || "",
-    link: user.link || "",
+    dob: convertDate() || "",
     location: user.location || "",
+    favoriteMovie: user.favoriteMovie || "",
+    favoriteGenres: user.favoriteGenres || "",
   });
 
   const onChange = async (e) => {
@@ -46,6 +59,7 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
       await dispatch(setUser(response.data));
 
       setDisplay();
+      /*  console.log({ ...newValues, newBanner, newAvatar }); */
     } catch (error) {
       console.log(error);
     } finally {
@@ -65,6 +79,7 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [display, setDisplay]);
+
   return (
     <div className="edit-profile-modal">
       <div className="layers" ref={ref}>
@@ -173,28 +188,28 @@ const EditProfileModal = ({ user, display, setDisplay }) => {
             <label>Birthday</label>
             <input
               type="date"
-              label="Link"
-              name="link"
-              placeholder="Link"
-              value={newValues.link}
+              label="dob"
+              name="dob"
+              placeholder="dob"
+              value={newValues.dob}
               onChange={onChange}
             />
             <label>Favorite Movie</label>
             <input
               type="text"
-              label="Link"
-              name="link"
-              placeholder="Link"
-              value={newValues.link}
+              label="favoriteMovie"
+              name="favoriteMovie"
+              placeholder="favoriteMovie"
+              value={newValues.favoriteMovie}
               onChange={onChange}
             />
             <label>Favorite Genres</label>
             <input
               type="text"
-              label="Link"
-              name="link"
-              placeholder="Link"
-              value={newValues.link}
+              label="favoriteGenres"
+              name="favoriteGenres"
+              placeholder="favoriteGenres"
+              value={newValues.favoriteGenres}
               onChange={onChange}
             />
             <label>Bio</label>

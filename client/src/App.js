@@ -27,7 +27,7 @@ const App = () => {
   const { socket } = useSelector((state) => state.socket);
   const { friends } = useSelector((state) => state.friends);
   const dispatch = useDispatch();
-  const notify = (input) => toast(input);
+  const notify = (input) => toast.success(input, {});
   useEffect(async () => {
     await dispatch(setSocket());
   }, []);
@@ -69,7 +69,19 @@ const App = () => {
         <p key={f.socketId}>{`_id: ${f._id} socketId: ${f.socketId}`}</p>
       ))} */}
       {/* {user && <EditProfileModal user={user} />} */}
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        toastStyle={{ backgroundColor: "#212c38" }}
+      />
       <Routes>
         <Route path="/signin" element={<Signup />} />
         <Route element={<ProtectedRoutes />}>
