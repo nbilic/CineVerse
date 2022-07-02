@@ -8,6 +8,7 @@ import { FaHeartBroken } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import { GoCalendar } from "react-icons/go";
 const POSTER_PATH = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
 const BACKDROP_PATH =
   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces";
@@ -16,6 +17,18 @@ const MovieDetailed = ({ movie }) => {
   const notify = (input) => toast.success(input, {});
   const { user } = useSelector((state) => state.user);
   const [watched, setWatched] = useState(false);
+  const [following, setFollowing] = useState(false);
+  const followMovie = async () => {
+    try {
+      const res = await api.put(`/api/user/followmovie/${movie.id}`, {
+        user: user._id,
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const handleRating = async (rating) => {
     try {
       await api.put("/api/user/addmovie", {
@@ -78,6 +91,7 @@ const MovieDetailed = ({ movie }) => {
             <h5 className="release-year">
               ({movie?.release_date.split("-")[0]})
             </h5>
+            <GoCalendar className="calendar-icon" onClick={followMovie} />
           </div>
 
           <div className="layer-2">

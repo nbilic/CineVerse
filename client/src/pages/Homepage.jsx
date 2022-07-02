@@ -13,6 +13,9 @@ import api from "../api/api";
 import RotateLoader from "react-spinners/RotateLoader";
 import TrendingMovies from "../components/Movies/TrendingMovies";
 import RecentActivity from "../components/Layout/RecentActivitiy";
+import OnlineFriends from "../components/Friends/OnlineFriends";
+import Calendar from "../components/Layout/Calendar";
+import SearchUsers from "../components/Layout/SearchUsers";
 
 const Homepage = () => {
   const { user } = useSelector((state) => state.user);
@@ -52,35 +55,40 @@ const Homepage = () => {
 
       <div className="main-content grid-container">
         <div className="center grid-item">
-          <div className="testa">
+          <div className="posts-container">
             <CreatePost addNewPost={addNewPost} />
-            {loading && (
-              <div className="loader-container">
-                <RotateLoader
-                  color="lightblue"
-                  size={10}
-                  loading={loading}
-                  margin="2"
-                />
-              </div>
-            )}
 
-            {posts?.map((post) => (
-              <Post
-                key={post?.post._id}
-                post={post.post}
-                user={post.user}
-                removePost={removePost}
-              />
-            ))}
-            <RecentActivity />
+            <div className="test-cont">
+              <div className="posts-container-homepage">
+                {loading && (
+                  <div className="loader-container">
+                    <RotateLoader
+                      color="lightblue"
+                      size={10}
+                      loading={loading}
+                      margin="2"
+                    />
+                  </div>
+                )}
+                {posts?.map((post) => (
+                  <Post
+                    key={post?.post._id}
+                    post={post.post}
+                    user={post.user}
+                    removePost={removePost}
+                  />
+                ))}
+              </div>
+              <div className="sidebar-content">
+                <SearchUsers />
+                <FriendInvites />
+                {/* <RecentActivity /> */}
+                <OnlineFriends />
+                <Calendar />
+              </div>
+            </div>
           </div>
         </div>
-
-        {/*   <div className="grid-item sidebar">
-          <FriendInvites />
-          <FriendsDisplay />
-        </div> */}
       </div>
     </div>
   );

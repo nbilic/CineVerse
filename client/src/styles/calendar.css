@@ -1,0 +1,71 @@
+.calendar {
+  margin-left: 5px;
+  background-color: var(--bgColor);
+  margin-top: 2%;
+  padding: 10px;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.calendar-top-layer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 30px);
+  width: fit-content;
+  margin: 10px auto;
+}
+
+.day {
+  border: 1px solid var(--primary);
+  text-align: center;
+  font-weight: 100;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-first-week {
+  border-top: 0px;
+}
+
+.first-week {
+}
+
+.empty-day {
+  border-bottom: 1px solid white;
+}
+
+.calendar-arrows {
+  font-size: 2em;
+}
+
+.calendar-arrows:hover {
+  cursor: pointer;
+  color: var(--niceGreen);
+}
+
+.day:hover {
+  cursor: pointer;
+  color: var(--niceGreen);
+}
+
+.movie-release {
+  background-color: crimson;
+}
+
+.today {
+  background-color: var(--niceGreen);
+  color: var(--bgColor);
+}
+
+.today:hover {
+  color: var(--bgColor);
+}

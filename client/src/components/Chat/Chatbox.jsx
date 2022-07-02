@@ -134,7 +134,6 @@ const Chatbox = () => {
         <CgBell className="chat-bell-icon" />
         <h2>Messages</h2>
       </div>
-
       {!loading && (
         <div className="chatbox-container-center">
           <div className="friend-list">
@@ -178,43 +177,43 @@ const Chatbox = () => {
                 ))}
               <div ref={messagesEndRef} />
             </div>
-            {room && (
-              <div className="chat-controlls">
-                <input
-                  type="text"
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  value={message}
-                  className="friend-private-chat-input"
-                />
-                <BiSend className="chat-action-icon" onClick={submitMessage} />
-                <BsEmojiSmile className="chat-action-icon" />
-
-                <button
-                  className="image-upload-button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    inputFile.current.click();
-                  }}
-                >
-                  <BsImage className="chat-action-icon" />
-                </button>
-
-                <input
-                  type="file"
-                  onChange={(e) => {
-                    toDataURL(e.target.files[0], setFile);
-                  }}
-                  ref={inputFile}
-                  accept="image/png, image/jpeg"
-                  hidden
-                />
-                {/*  <button onClick={submitMessage}>SEND</button> */}
-              </div>
-            )}
           </div>
         </div>
       )}
+
+      <div className="chat-controlls">
+        <input
+          type="text"
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          value={message}
+          disabled={!room}
+          className="friend-private-chat-input"
+        />
+        <BiSend className="chat-action-icon" onClick={submitMessage} />
+        <BsEmojiSmile className="chat-action-icon" />
+
+        <button
+          className="image-upload-button"
+          onClick={(e) => {
+            e.preventDefault();
+            inputFile.current.click();
+          }}
+        >
+          <BsImage className="chat-action-icon" />
+        </button>
+
+        <input
+          type="file"
+          onChange={(e) => {
+            toDataURL(e.target.files[0], setFile);
+          }}
+          ref={inputFile}
+          accept="image/png, image/jpeg"
+          hidden
+        />
+        {/*  <button onClick={submitMessage}>SEND</button> */}
+      </div>
     </div>
   );
 };

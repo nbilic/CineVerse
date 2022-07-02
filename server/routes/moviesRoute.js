@@ -65,6 +65,29 @@ const getGenres = async () => {
   }
 };
 
+const getListOfMovies = async (movies) => {
+  try {
+    const res = await Promise.all(
+      await movies.map(async (m) => await getMovieById(m))
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+// Get list of movies
+router.get("/movielist", async (req, res) => {
+  try {
+    const listOfMovies = await getListOfMovies(req.query.list);
+
+    res.status(200).json(listOfMovies);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json(error);
+  }
+});
 // Get all movies from user
 router.get("/user/:id", async (req, res) => {
   try {
@@ -82,6 +105,7 @@ router.get("/user/:id", async (req, res) => {
     res.status(200).json(userMovies);
   } catch (error) {
     console.log(error.message);
+    res.status(500).json(error);
   }
 });
 

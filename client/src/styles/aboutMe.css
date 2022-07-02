@@ -1,24 +1,21 @@
-.about-me{
-    background-color: var(--bgColor);
-    padding: 20px;
-    color:var(--primary);
-    display: flex;
-    font-size: 1.2em;
-    justify-content: center;
-    
+.about-me {
+  background-color: var(--bgColor);
+  padding: 20px;
+  color: var(--primary);
+  display: flex;
+  font-size: 1.2em;
+  justify-content: center;
 }
 
-.left-side,.right-side{
-    
-    width: 25%;
+.left-side,
+.right-side-about-me {
+  width: 25%;
 }
 
-.pair p{
-    font-size: .8em;
-    
+.pair p {
+  font-size: 0.8em;
 }
 
-.pair{
-    padding: 10px;
+.pair {
+  padding: 10px;
 }
-

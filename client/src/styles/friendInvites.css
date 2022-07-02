@@ -1,61 +1,66 @@
-.friend-invites-container{
-    background-color: var(--bgColor);
-    padding: 15px;
-    width: 100%;
-    height: fit-content;
-    max-height: 500px;
-    overflow-y: auto;
-    margin-top: 3%;
-    border:0px solid rgb(226, 226, 226);
-    font-size: 1.05em;
-    color:var(--primary);
-    border-radius: 3%;
-   
+.friend-invites-container {
+  background-color: var(--bgColor);
+  padding: 10px;
+  height: fit-content;
+  max-height: 500px;
+  overflow-y: auto;
+  border: 0px solid rgb(226, 226, 226);
+  font-size: 1em;
+  color: var(--primary);
+  margin-left: 2%;
+  /* width: 100%; */
 }
 
 .friend-invites-container img {
-    height: 48px;
-    width: 48px;
-    min-width: 48px;
-    min-height: 48px;
-    margin-right: 10px;
-    border-radius: 10px;
-    object-fit: cover;
+  height: 38px;
+  width: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  margin-right: 10px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
-.invite{
-    display: flex;
-    align-items: center;
-    margin: 2% 0%;
-    padding: 5px;
+.invite {
+  display: flex;
+  align-items: center;
+  margin: 2% 0%;
+  padding: 5px;
+  width: 100%;
 }
 
-.right-side{
-   
-    width: 100%;
-}
-.right-side button{
-    font-size: 0.8em;
-    padding: 5px 10px;
-    font-weight: bold;
-    width: 80px;
-    color:rgb(255, 255, 255);
-    border:none;
-    border-radius: 5px;
-    margin-top: 5px;
-    
+.right-side {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
 }
 
-.accept-button{
-    background-color: rgb(8, 141, 205);
-    margin-right: 2%;
+.accept-button {
 }
 
-.denie-button{
-   background-color: rgb(8, 141, 205);
-    
+.denie-button {
+  color: crimson;
+  margin-left: 10px;
 }
 
-.right-side button:hover{
-    cursor: pointer;
+.right-side button:hover {
+  cursor: pointer;
+}
+
+.invite-actions {
+  display: flex;
+
+  right: 0px;
+  justify-self: end;
+}
+
+.invite-username {
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.accept-button:hover,
+.denie-button:hover {
+  cursor: pointer;
 }

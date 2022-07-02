@@ -32,7 +32,7 @@ const SingleMovie = () => {
     <div>
       <Navbar />
 
-      <div className="center grid-item">
+      <div className="center grid-item movie-item">
         {movie && <MovieDetailed movie={movie} />}
         {cast && <Cast cast={cast} />}
       </div>

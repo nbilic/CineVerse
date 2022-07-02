@@ -74,6 +74,10 @@ const userSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+    moviesFollowed: {
+      type: [String],
+      default: [],
+    },
     dob: {
       type: Date,
     },

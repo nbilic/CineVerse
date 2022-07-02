@@ -21,6 +21,8 @@ import TrendingMoviesPage from "./pages/TrendingMoviesPage";
 import SingleMovie from "./pages/SingleMovie";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import SearchMovies from "./pages/SearchMovies";
+import SearchUsers from "./components/Layout/SearchUsers";
+import FoundUsers from "./pages/FoundUsers";
 
 const App = () => {
   const { user } = useSelector((state) => state.user);
@@ -87,6 +89,7 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/chat" element={<Inbox />} />
+          <Route path="/search" element={<FoundUsers />} />
           <Route path="/movies/trending" element={<TrendingMoviesPage />} />
           <Route path="/movies/upcoming" element={<UpcomingMovies />} />
           <Route path="/movies/search" element={<SearchMovies />} />

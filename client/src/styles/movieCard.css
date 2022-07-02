@@ -80,3 +80,53 @@
   right: -14px;
   bottom: -9px;
 }
+
+.mini-movie-card {
+  border: 0px solid blue;
+  margin: 10px;
+}
+
+.mini-movie-poster {
+  width: 100%;
+  border-radius: 10%;
+  border: 0px solid green;
+}
+
+.movie-modal {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.mini-movie-release-date {
+  font-size: 0.6em;
+  width: fit-content;
+  border: 0px solid red;
+}
+
+.mini-movie-card h5 {
+  border: 0px solid red;
+  width: fit-content;
+  font-size: 0.7em;
+}
+
+.modal-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-modal {
+  position: absolute;
+  right: 10px;
+}
+
+.close-modal:hover {
+  cursor: pointer;
+  color: crimson;
+}
+
+.mini-movie-card:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,71 @@
+.chat-friend-display-avatar {
+  height: 48px;
+  width: 48px;
+}
+
+.chat-friend-display {
+  display: flex;
+  color: var(--primary);
+  margin: 10px;
+  width: 200px;
+}
+
+.chat-friend-display:hover {
+  cursor: pointer;
+  color: var(--niceGreen);
+}
+.chat-friend-display-details {
+  margin-left: 10px;
+}
+
+.chat {
+  border: 0px solid red;
+  height: 100%;
+  display: flex;
+  /*  padding: 30px; */
+  width: 100%;
+  margin: auto;
+}
+
+.chat-window {
+  border: 0px solid green;
+  width: 100%;
+}
+
+.chat-messages {
+  height: 350px;
+  overflow-y: auto;
+}
+
+.chat-controlls {
+  border: 0px solid red;
+}
+
+.chat-input-div {
+  width: 100%;
+  border: 0px solid red;
+  position: relative;
+  margin-top: 1%;
+}
+
+.chat-input-element {
+  width: 100%;
+  background-color: var(--bgColor);
+  padding: 10px;
+  color: var(--primary);
+  border: 1px solid var(--secondary);
+  outline: none;
+}
+
+.chat-input-div-actions {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+}
+
+.chat-action-icon:hover {
+  color: var(--niceGreen);
+}

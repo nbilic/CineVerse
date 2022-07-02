@@ -18,6 +18,16 @@ const getAllMoviesFromUser = async (user) => {
   }
 };
 
+/* const getAllFollowedMoviesFromUser = async(user) => {
+  try {
+    const movies = await Promise.all(
+      await user.movies.map(async (movie) => await Movie.findById(movie))
+    );
+  } catch (error) {
+    
+  }console.log(error.message);
+} */
+
 // Get a single user
 router.get("/single/:handle", async (req, res) => {
   try {
@@ -28,6 +38,34 @@ router.get("/single/:handle", async (req, res) => {
     const { password, ...other } = user;
 
     res.status(200).json(other["0"]);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// Get a list of users from user input
+router.get("/search", async (req, res) => {
+  try {
+    const substr = req.query.substr;
+
+    const users = await User.find({ fullName: { $regex: substr } }).collation({
+      locale: "en",
+      strength: 2,
+    });
+
+    console.log(users.length);
+    const cleanOutput = users.map((user) => {
+      return {
+        fullName: user.fullName,
+        avatar: user.avatar,
+        _id: user._id,
+        bio: user.bio,
+        handle: user.handle,
+        banner: user.banner,
+      };
+    });
+
+    res.status(200).json(cleanOutput);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -290,6 +328,40 @@ router.put("/addmovie", requireUser, async (req, res) => {
   }
 });
 
+// Get movies the user follows
+router.get("/followedmovies/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    return res.status(200).json(user.moviesFollowed);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json(error);
+  }
+});
+
+// Add a movie to user followed list
+router.put("/followmovie/:id", requireUser, async (req, res) => {
+  try {
+    const user = await User.findById(req.body.user);
+    if (!checkIfUserHasAuthorizedAcces(req.user.email, user.email))
+      return res.status(403).json("Unauthorized action!");
+
+    /* const movies = await getAllFollowedMoviesFromUser(user); */
+    const isFollowed = user.moviesFollowed?.find(
+      (movie) => movie === req.params.id
+    );
+    if (!isFollowed) {
+      user.moviesFollowed = [...user.moviesFollowed, req.params.id];
+      await user.save();
+      return res.status(200).json("OK");
+    }
+    return res.status(200).json("ALREADY FOLLOWING");
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json(error);
+  }
+});
+
 // Remove movie from movie collection
 router.delete("/removemovie/:id", requireUser, async (req, res) => {
   try {
@@ -328,6 +400,7 @@ router.get("/watched/:id", requireUser, async (req, res) => {
     res.status(500).json(error);
   }
 });
+
 // Edit general user information
 router.put("/:id", requireUser, async (req, res) => {
   try {

@@ -1,0 +1,18 @@
+.search-users-div {
+  margin-left: 5px;
+  background-color: var(--bgColor);
+  margin-bottom: 2%;
+  padding: 10px;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.user-search {
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: var(--secondary);
+  border: 1px solid var(--secondary);
+  color: var(--primary);
+  outline: none;
+}

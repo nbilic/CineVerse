@@ -7,10 +7,21 @@ import { BiMessageDetail, BiNews, BiCog } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/api";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const routeToProfile = useRouteToProfile(user?.handle);
+  const logOut = async () => {
+    try {
+      await api.delete(`http://localhost:8080/auth/session`, {
+        withCredentials: true,
+      });
+      navigate(`/signin`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const routeToHome = () => {
     navigate("/");
   };
@@ -74,7 +85,7 @@ const Navbar = () => {
 
               <li>
                 {" "}
-                <FiSettings className="shortcut-icons" />
+                <FiSettings className="shortcut-icons" onClick={logOut} />
               </li>
               {/*    <li onClick={logOut}>
           {" "}

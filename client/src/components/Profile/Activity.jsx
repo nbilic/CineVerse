@@ -2,7 +2,7 @@ import Post from "../Posts/Post";
 
 const Activity = ({ posts, removePost }) => {
   return (
-    <div>
+    <div className="profile-posts-container">
       {posts?.map((post) => (
         <Post
           key={post?.post._id}

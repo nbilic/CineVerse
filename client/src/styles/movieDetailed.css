@@ -170,6 +170,23 @@
   cursor: pointer;
   color: crimson;
 }
+
+.movie-item {
+  display: flex;
+  flex-direction: column;
+  border: 0px solid red;
+}
+
+.calendar-icon {
+  font-size: 1.4em;
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
+.calendar-icon:hover {
+  color: var(--niceGreen);
+  cursor: pointer;
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 }

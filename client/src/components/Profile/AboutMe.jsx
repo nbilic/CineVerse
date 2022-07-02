@@ -30,7 +30,7 @@ const AboutMe = ({ user }) => {
           <p>{user.favoriteGenres || "N/A"}</p>
         </div>
       </div>
-      <div className="right-side">
+      <div className="right-side-about-me">
         <div className="pair">
           <h5>About me: </h5>
           <p>{user.bio || "N/A"}</p>

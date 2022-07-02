@@ -1,31 +1,43 @@
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,500,700,800');
-@import url('https://fonts.googleapis.com/css?family=Satisfy');
+@import url("https://fonts.googleapis.com/css?family=Muli:300,400,400i,500,700,800");
+@import url("https://fonts.googleapis.com/css?family=Satisfy");
 
-:root{
-    --bgColor: #212c38;
-    --primary: #f0ede9;
-    --secondary:#2c3947;
-    --niceGreen: #30F5C8;
+:root {
+  --bgColor: #212c38;
+  --primary: #f0ede9;
+  --secondary: #2c3947;
+  --niceGreen: #30f5c8;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Muli", "Segoe Ui";
-    position: relative;
-   
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Muli", "Segoe Ui";
+  position: relative;
 }
 
-.App{
-    min-height: 100vh;
-    border:0px solid red;
-    background-color: var(--secondary);
-    
- }
+.App {
+  min-height: 100vh;
+  border: 0px solid red;
+  background-color: var(--secondary);
+}
 
-body{
-    overflow-y: scroll;
+body {
+  overflow-y: scroll;
+}
 
+.posts-container {
+  width: 60%;
+  border: 0px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.posts-container-homepage {
+  width: 75%;
+  border: 0px solid red;
+}
+
+.test-cont {
+  display: flex;
 }
