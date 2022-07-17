@@ -17,7 +17,7 @@ const Inbox = () => {
             <div className="posts-container-homepage users-found">
               <Chat />
             </div>
-            <div className="sidebar-content">
+            <div className="sidebar-content desktop-position">
               <SearchUsers />
               <FriendInvites />
               {/* <RecentActivity /> */}

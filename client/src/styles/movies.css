@@ -1,52 +1,55 @@
-.movies-tab{
-    padding: 10px;
-    background-color: var(--bgColor);
-    color:var(--primary);
+.movies-tab {
+  padding: 10px;
+  background-color: var(--bgColor);
+  color: var(--primary);
 }
 
-.tab-buttons{
-    display: flex;
-    justify-content: center;
+.tab-buttons {
+  display: flex;
+  justify-content: center;
 }
 
-.filter-button{
-    width: 150px;
-    padding: 8px;
-    background-color: var(--secondary);
-    color:var(--primary);
-    border:0px;
-    font-weight: bold;
+.filter-button {
+  width: 150px;
+  padding: 8px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: 0px;
+  font-weight: bold;
 }
 
-.filter-button:hover{
-    color:var(--niceGreen);
-    cursor: pointer;
+.filter-button:hover {
+  color: var(--niceGreen);
+  cursor: pointer;
 }
 
-.filter-by-genre select{
-    padding: 8px;
-    background-color: var(--secondary);
-    border:0px;
-    color:var(--primary);
-    margin-top: 5px;
-    font-weight: bold;
-    margin-bottom: 5px;
+.filter-by-genre select {
+  padding: 8px;
+  background-color: var(--secondary);
+  border: 0px;
+  color: var(--primary);
+  margin-top: 5px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.filter-by-genre .filters-row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+.filter-by-genre .filters-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.filter-option{
-    margin: 5px ;
-    background-color: var(--secondary);
-    padding: 6px;
-    font-weight: bold;
+.filter-option {
+  margin: 5px;
+  background-color: var(--secondary);
+  padding: 6px;
+  font-weight: bold;
 }
 
-.filter-option:hover{
-    color:var(--niceGreen);
-    cursor: pointer;
+.filter-option:hover {
+  color: var(--niceGreen);
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
 }

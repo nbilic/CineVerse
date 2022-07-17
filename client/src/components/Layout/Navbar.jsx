@@ -8,6 +8,7 @@ import { FiSettings } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
+import NavbarRoutes from "./NavbarRoutes";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
@@ -27,7 +28,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar high-z">
         <div className="navbar-container">
           <div className="dropdown-menus">
             <img
@@ -39,41 +40,12 @@ const Navbar = () => {
             <p className="site-name" onClick={routeToHome}>
               CineVerse
             </p>
-            <div className="navbar-routes">
-              <ul>
-                <li onClick={() => navigate("/")}>Timeline</li>
-                <li className="dropdown">
-                  Movies
-                  <div className="dropdown-content">
-                    <ul>
-                      <li onClick={() => navigate("/movies/trending")}>
-                        TRENDING
-                      </li>
-                      <li onClick={() => navigate("/movies/upcoming")}>
-                        UPCOMING
-                      </li>
-                      <li onClick={() => navigate("/movies/search")}>SEARCH</li>
-                    </ul>
-                  </div>
-                </li>
-
-                <li onClick={() => navigate(`/profile/${user.handle}`)}>
-                  PROFILE
-                </li>
-              </ul>
+            <div className="desktop-position">
+              <NavbarRoutes />
             </div>
           </div>
 
           <div className="icons">
-            {/* <div className="search">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="search-input"
-              />
-
-              <BsSearch className="icon search-icon" />
-            </div> */}
             <ul>
               <li onClick={() => navigate("/chat")}>
                 <BiMessageDetail className="shortcut-icons" />
@@ -101,6 +73,9 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      <div className="mobile-position high-z">
+        <NavbarRoutes />
+      </div>
     </>
   );
 };

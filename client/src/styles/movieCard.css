@@ -130,3 +130,33 @@
 .mini-movie-card:hover {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 600px) {
+  .movie-card-container {
+    color: var(--primary);
+    border: 0px solid red;
+    width: 150px;
+    margin: 0;
+
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border: 0px solid red;
+  }
+
+  .movie-card-upper {
+    width: 120px;
+  }
+
+  .movie-user-rating {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 70px;
+  }
+}

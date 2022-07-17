@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import ProtectedRoutes from "./components/Authentication/ProtectedRoutes";
 import { useDispatch, useSelector } from "react-redux";
-import Test from "./components/Test";
 import { useEffect, useState } from "react";
 import { setSocket } from "./redux/socket";
 import {
@@ -21,8 +20,11 @@ import TrendingMoviesPage from "./pages/TrendingMoviesPage";
 import SingleMovie from "./pages/SingleMovie";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import SearchMovies from "./pages/SearchMovies";
-import SearchUsers from "./components/Layout/SearchUsers";
 import FoundUsers from "./pages/FoundUsers";
+import Groups from "./pages/Groups";
+
+import CreateNewGroupModal from "./pages/CreateNewGroupModal";
+import GroupDisplay from "./pages/GroupDisplay";
 
 const App = () => {
   const { user } = useSelector((state) => state.user);
@@ -65,12 +67,6 @@ const App = () => {
 
   return (
     <div className="App">
-      {/*  <button onClick={() => console.log(getPath())}>TEST</button> */}
-      {/*  <p>{location.pathname}</p> */}
-      {/* {friends.map((f) => (
-        <p key={f.socketId}>{`_id: ${f._id} socketId: ${f.socketId}`}</p>
-      ))} */}
-      {/* {user && <EditProfileModal user={user} />} */}
       <ToastContainer
         position="bottom-left"
         autoClose={1000}
@@ -96,6 +92,9 @@ const App = () => {
           <Route path="/movies/:id" element={<SingleMovie />} />
           <Route path="/post/:id" element={<SinglePost />} />
           <Route path="/profile/:handle" element={<Profile />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/group" element={<GroupDisplay />} />
+          <Route path="/create-new-group" element={<CreateNewGroupModal />} />
         </Route>
       </Routes>
     </div>

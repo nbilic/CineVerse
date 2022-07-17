@@ -1,18 +1,12 @@
 import "../styles/homepage.css";
 import Navbar from "../components/Layout/Navbar";
-import Shortcuts from "../components/Layout/Shortcuts";
 import CreatePost from "../components/Posts/CreatePost";
-import FriendsDisplay from "../components/Friends/FriendsDisplay";
 import Post from "../components/Posts/Post";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import FriendInvites from "../components/Friends/FriendInvites";
-import RecentUsers from "../components/Users/RecentUsers";
-import UserDisplay from "../components/Layout/UserDisplay";
 import api from "../api/api";
 import RotateLoader from "react-spinners/RotateLoader";
-import TrendingMovies from "../components/Movies/TrendingMovies";
-import RecentActivity from "../components/Layout/RecentActivitiy";
 import OnlineFriends from "../components/Friends/OnlineFriends";
 import Calendar from "../components/Layout/Calendar";
 import SearchUsers from "../components/Layout/SearchUsers";
@@ -79,7 +73,7 @@ const Homepage = () => {
                   />
                 ))}
               </div>
-              <div className="sidebar-content">
+              <div className="sidebar-content desktop-position">
                 <SearchUsers />
                 <FriendInvites />
                 {/* <RecentActivity /> */}

@@ -15,6 +15,7 @@ import useToggle from "../../hooks/useToggle";
 import useRouteToProfile from "../../hooks/useRouteToProfile";
 import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import PostImage from "./PostImage";
 const Post = ({ post, user: originalPoster, removePost }) => {
   const [replies, setReplies] = useState([]);
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Post = ({ post, user: originalPoster, removePost }) => {
   const { socket } = useSelector((state) => state.socket);
   const [votesModalMode, setVotesModalMode] = useState();
   const [imageModal, toggleImageModal] = useToggle(false);
+  const [image, setImage] = useState("");
   const [votesModal, toggleVotesModal] = useToggle(false);
   const { user } = useSelector((state) => state.user);
   const routeToProfile = useRouteToProfile(originalPoster.handle);
@@ -90,7 +92,7 @@ const Post = ({ post, user: originalPoster, removePost }) => {
         <ImageModal
           setDisplay={toggleImageModal}
           display={imageModal}
-          img={post.image}
+          img={image}
         />
       )}
       {votesModal && (
@@ -144,6 +146,16 @@ const Post = ({ post, user: originalPoster, removePost }) => {
         </div>
         <div className="post-content">
           <p className="post-text">{post?.content}</p>
+          <div className="post-images">
+            {post?.images.map((image) => (
+              <PostImage
+                image={image}
+                toggleImageModal={toggleImageModal}
+                setImage={setImage}
+                key={image}
+              />
+            ))}
+          </div>
           {post?.image && (
             <img
               src={post.image}

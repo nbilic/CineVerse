@@ -84,7 +84,6 @@
 }
 
 .submitted-img {
-  width: fit-content;
   max-height: 300px;
   max-width: 180px;
   border: 1px solid rgb(184, 184, 184);
@@ -96,7 +95,7 @@
   right: 0px;
   font-size: 1.5em;
   color: rgb(197, 49, 4);
-  background-color: black;
+  background-color: none;
 }
 
 .close-icon:hover {
@@ -112,4 +111,8 @@
 .post-box .post-icon:hover {
   color: lightblue;
   cursor: pointer;
+}
+
+.pending-image-upload {
+  display: flex;
 }

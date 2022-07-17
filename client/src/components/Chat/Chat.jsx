@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { BiSend } from "react-icons/bi";
+import { BiArrowToLeft, BiSend } from "react-icons/bi";
 import { BsImage, BsEmojiSmile } from "react-icons/bs";
-import { CgBell } from "react-icons/cg";
 import ChatMessage from "./ChatMessage";
 import api from "../../api/api";
 import { toDataURL } from "../../functions/convertImage";
 import ChatFriendDisplay from "./ChatFriendDisplay";
 import "../../styles/chat.css";
 import Friend from "../Friends/Friend";
+import { BiRightArrowAlt, BiLeftArrowAlt } from "react-icons/bi";
 const Chat = () => {
   // REDUX
   const { user } = useSelector((state) => state.user);
@@ -21,21 +21,11 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState(false);
   const [loading, setLoading] = useState(true);
   const { friends: onlineFriends } = useSelector((state) => state.friends);
+  const [showFriends, setShowFriends] = useState(true);
   const [file, setFile] = useState(null);
 
   const inputFile = useRef(null);
   const messagesEndRef = useRef(null);
-
-  const checkIfOnline = (id) => onlineFriends.find((f) => id === f._id);
-
-  const getLastMessageFromUser = (user) => {
-    const lastMessage = messages.find(
-      (m) =>
-        m.userHandle === user.handle &&
-        m.messages[m.messages.length - 1].content
-    );
-    return lastMessage;
-  };
   const submitMessage = () => {
     socket?.emit("pm-out", {
       room: activeChat._id,
@@ -121,59 +111,71 @@ const Chat = () => {
 
   return (
     <div className="chat">
-      <div className="chat-friends-container">
-        {friends.map((friend) => (
-          <ChatFriendDisplay
-            key={friend._id}
-            friend={friend}
-            setActiveChat={setActiveChat}
-          />
-        ))}
-      </div>
+      {!activeChat && (
+        <div className="chat-friends-container">
+          <h4>Friends: </h4>
+          {friends.map((friend) => (
+            <ChatFriendDisplay
+              key={friend._id}
+              friend={friend}
+              setActiveChat={setActiveChat}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="chat-window">
-        {activeChat && <Friend friend={activeChat} />}
-        <div className="chat-messages">
-          {messages
-            .find((user) => user.userHandle === activeChat?.handle)
-            ?.messages?.map((msg) => (
-              <ChatMessage msg={msg} user={user} key={msg.id} />
-            ))}
-          <div ref={messagesEndRef} />
-        </div>
-        <div className="chat-input-div">
-          <input
-            type="text"
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={handleKeyDown}
-            value={message}
-            disabled={!activeChat}
-            className="chat-input-element"
-          />
-          <div className="chat-input-div-actions">
-            <BiSend className="chat-action-icon" onClick={submitMessage} />
-            <BsEmojiSmile className="chat-action-icon" />
-
-            <button
-              className="image-upload-button"
-              onClick={(e) => {
-                e.preventDefault();
-                inputFile.current.click();
-              }}
-            >
-              <BsImage className="chat-action-icon" />
-            </button>
-
-            <input
-              type="file"
-              onChange={(e) => {
-                toDataURL(e.target.files[0], setFile);
-              }}
-              ref={inputFile}
-              accept="image/png, image/jpeg"
-              hidden
-            />
+        <div className="active-chat-div">
+          <div className="display-friends-button">
+            {activeChat && (
+              <BiLeftArrowAlt onClick={() => setActiveChat(null)} />
+            )}
+            {activeChat && <Friend friend={activeChat} />}
           </div>
+          <div className="chat-messages">
+            {messages
+              .find((user) => user.userHandle === activeChat?.handle)
+              ?.messages?.map((msg) => (
+                <ChatMessage msg={msg} user={user} key={msg.id} />
+              ))}
+            <div ref={messagesEndRef} />
+          </div>
+          {activeChat && (
+            <div className="chat-input-div">
+              <input
+                type="text"
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={handleKeyDown}
+                value={message}
+                disabled={!activeChat}
+                className="chat-input-element"
+              />
+              <div className="chat-input-div-actions">
+                <BiSend className="chat-action-icon" onClick={submitMessage} />
+                <BsEmojiSmile className="chat-action-icon" />
+
+                <button
+                  className="image-upload-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    inputFile.current.click();
+                  }}
+                >
+                  <BsImage className="chat-action-icon" />
+                </button>
+
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    toDataURL(e.target.files[0], setFile);
+                  }}
+                  ref={inputFile}
+                  accept="image/png, image/jpeg"
+                  hidden
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

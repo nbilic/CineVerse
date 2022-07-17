@@ -17,9 +17,10 @@ const CreatePost = ({ addNewPost }) => {
     username: `${user.firstName} ${user.lastName}`,
     content: "",
   });
-  const [file, setFile] = useState(null);
+  //const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
 
-  const checkIfValidPost = () => file || post.content;
+  const checkIfValidPost = () => files.length || post.content;
 
   const commitPost = async () => {
     try {
@@ -27,7 +28,7 @@ const CreatePost = ({ addNewPost }) => {
       const response = await api.post(`/api/post/create`, {
         content: post.content,
         author: user._id,
-        image: file,
+        images: files,
         publishedAt: new Date(),
       });
 
@@ -36,7 +37,7 @@ const CreatePost = ({ addNewPost }) => {
         ...post,
         content: "",
       });
-      setFile(null);
+      setFiles([]);
     } catch (error) {
       console.log(error);
     }
@@ -45,12 +46,13 @@ const CreatePost = ({ addNewPost }) => {
   const toDataURL = (img) => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      setFile(reader.result);
+      //setFile(reader.result);
+      setFiles([...files, reader.result]);
     };
     reader.readAsDataURL(img);
   };
 
-  const removeImage = () => setFile(null);
+  const removeImage = (file) => setFiles(() => files.filter((f) => f !== file));
 
   return (
     <div className="create-post-div">
@@ -109,12 +111,17 @@ const CreatePost = ({ addNewPost }) => {
         </div>
       </form>
 
-      {file && (
-        <div className="pending-img">
-          <img src={file} className="submitted-img" alt="submitting" />
-          <CgCloseR className="close-icon" onClick={removeImage} />
-        </div>
-      )}
+      <div className="pending-image-upload">
+        {files.map((file) => (
+          <div className="pending-img" key={file}>
+            <img src={file} className="submitted-img" alt="submitting" />
+            <CgCloseR
+              className="close-icon"
+              onClick={() => removeImage(file)}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

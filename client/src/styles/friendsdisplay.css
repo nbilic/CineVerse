@@ -12,6 +12,10 @@
   margin-top: 2%;
 }
 
+.friends-display {
+  width: 50%;
+  margin: auto;
+}
 .friends-display ul li {
   list-style: none;
   display: flex;
@@ -77,3 +81,15 @@
   align-items: center;
 }
  */
+
+@media only screen and (max-width: 600px) {
+  .friends-display {
+    width: 100%;
+    margin: auto;
+  }
+
+  .grid-item-2,
+  .grid-item-1 {
+    font-size: 0.8em;
+  }
+}

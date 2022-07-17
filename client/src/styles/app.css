@@ -26,18 +26,6 @@ body {
   overflow-y: scroll;
 }
 
-.posts-container {
-  width: 60%;
-  border: 0px solid red;
-  display: flex;
-  flex-direction: column;
-}
-
-.posts-container-homepage {
-  width: 75%;
-  border: 0px solid red;
-}
-
 .test-cont {
   display: flex;
 }

@@ -45,6 +45,7 @@ router.post("/create", requireUser, async (req, res) => {
       content: req.body.content,
       author: user._id,
       image: req.body.image,
+      images: req.body.images,
       publishedAt: req.body.publishedAt,
     });
 

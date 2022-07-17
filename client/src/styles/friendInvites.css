@@ -33,7 +33,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  border: 1px solid red;
+  border: 0px solid red;
 }
 
 .accept-button {
@@ -62,5 +62,10 @@
 
 .accept-button:hover,
 .denie-button:hover {
+  cursor: pointer;
+}
+
+.invite-avatar:hover,
+.invite-username:hover {
   cursor: pointer;
 }

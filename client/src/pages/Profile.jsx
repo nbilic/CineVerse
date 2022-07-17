@@ -93,7 +93,7 @@ const Profile = () => {
           {!loading && tab === FRIENDS && <Friends id={user._id} />}
           {!loading && tab === GROUPS && <Groups />}
           {!loading && tab === MOVIES && <Movies user={user} />}
-          {!loading && tab === MEDIA && <Media />}
+          {!loading && tab === MEDIA && <Media posts={posts} />}
           {!loading && tab === STATS && (
             <Statistics posts={posts} user={user} />
           )}

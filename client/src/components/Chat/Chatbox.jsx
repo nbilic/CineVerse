@@ -2,18 +2,18 @@ import { useEffect, useState, useRef } from "react";
 import { BiSend } from "react-icons/bi";
 import { BsImage, BsEmojiSmile } from "react-icons/bs";
 import api from "../../api/api";
-import "../../styles/chatbox.css";
+import "../../styles/chatbox.css"; //
 import { useSelector } from "react-redux";
 import { CgBell } from "react-icons/cg";
 import ChatMessage from "./ChatMessage";
-import Friend from "../Friends/Friend";
+import Friend from "../Friends/Friend"; //
 import { toDataURL } from "../../functions/convertImage";
 
 const Chatbox = () => {
   const { user } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
   const { friends: onlineFriends } = useSelector((state) => state.friends);
-  const [room, setRoom] = useState(null);
+  const [room, setRoom] = useState(null); // upitno
   const [currentFriend, setCurrentFriend] = useState(null);
   const [friends, setFriends] = useState([]);
   const [messages, setMessages] = useState([]);

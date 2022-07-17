@@ -17,6 +17,7 @@ import ConfirmAction from "../Modals/ConfirmAction";
 import EditProfileModal from "./EditProfileModal";
 import FriendsInCommon from "./FriendsInCommon";
 import ImageModal from "../Modals/ImageModal";
+import ProfileTabs from "./ProfileTabs";
 
 const [ACTIVITY, ABOUTME, FRIENDS, GROUPS, MOVIES, MEDIA, STATS] = [
   "ACTIVITY",
@@ -111,7 +112,9 @@ const ProfileDisplay = ({ profile, setTab, tab }) => {
           content={confirmActionText}
         />
       )}
-
+      <div className="mobile-position">
+        <ProfileTabs setTab={setTab} tab={tab} />
+      </div>
       <div className="upper-container">
         <img
           src={profile?.banner}
@@ -136,57 +139,9 @@ const ProfileDisplay = ({ profile, setTab, tab }) => {
             </div>
           </div>
 
-          <ul className="profile-tabs">
-            <li
-              onClick={() => setTab(ACTIVITY)}
-              className={`${tab === ACTIVITY && "active"}`}
-            >
-              <CgNotes className="profile-icon" />
-              <span>Activity</span>
-            </li>
-            <li
-              onClick={() => setTab(ABOUTME)}
-              className={`${tab === ABOUTME && "active"}`}
-            >
-              <FiBook className="profile-icon" />
-              <span>About me</span>
-            </li>
-            <li
-              onClick={() => setTab(FRIENDS)}
-              className={`${tab === FRIENDS && "active"}`}
-            >
-              <FaUserFriends className="profile-icon" />
-              <span>Friends</span>
-            </li>
-            <li
-              onClick={() => setTab(GROUPS)}
-              className={`${tab === GROUPS && "active"}`}
-            >
-              <HiUserGroup className="profile-icon" />
-              <span>Groups</span>
-            </li>
-            <li
-              onClick={() => setTab(MOVIES)}
-              className={`${tab === MOVIES && "active"}`}
-            >
-              <BiMoviePlay className="profile-icon" />
-              <span>Movies</span>
-            </li>
-            <li
-              onClick={() => setTab(MEDIA)}
-              className={`${tab === MEDIA && "active"}`}
-            >
-              <ImImages className="profile-icon" />
-              <span>Media</span>
-            </li>
-            <li
-              onClick={() => setTab(STATS)}
-              className={`${tab === STATS && "active"}`}
-            >
-              <IoStatsChart className="profile-icon" />
-              <span>Stats</span>
-            </li>
-          </ul>
+          <div className="desktop-position">
+            <ProfileTabs setTab={setTab} tab={tab} />
+          </div>
           <div className="user-interactions">
             {friendsWithUser && (
               <AiOutlineMessage className="send-message-icon" />

@@ -1,0 +1,110 @@
+.groups-container-homepage {
+  background-color: var(--bgColor);
+}
+
+.groups-container {
+  margin-top: 1%;
+}
+
+.group-search-display {
+  padding: 10px;
+  color: var(--primary);
+  border-bottom: 1px solid var(--secondary);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+}
+
+.group-picture {
+  height: 38px;
+  width: 38px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.group-info {
+  display: flex;
+  align-items: center;
+}
+
+.create-new-group-button {
+  background-color: var(--bgColor);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--primary);
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+
+.create-group-icon {
+  font-size: 1.3em;
+  margin-right: 1%;
+}
+
+.create-group-icon:hover {
+  cursor: pointer;
+  color: var(--niceGreen);
+}
+
+.create-new-group-modal {
+  background-color: var(--bgColor);
+  color: var(--primary);
+  padding: 10px;
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+
+.create-new-group-modal-first-layer {
+  display: flex;
+  align-items: center;
+}
+
+.create-new-group-form > input {
+  width: 100%;
+  padding: 5px;
+  margin: 2% 0%;
+}
+
+.create-new-group-form > select,
+.create-new-group-form > button {
+  color: var(--primary);
+  background-color: var(--bgColor);
+  border: 1px solid var(--primary);
+  padding: 5px;
+  margin: 2% 0%;
+}
+
+.create-new-group-form > button:hover {
+  cursor: pointer;
+}
+
+.group-display {
+  width: 50%;
+  margin: auto;
+  margin-top: 1%;
+}
+
+.group-info-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--bgColor);
+  color: var(--primary);
+  width: 300px;
+}
+
+.groups-side-bar {
+  background-color: var(--bgColor);
+  color: var(--primary);
+  width: 300px;
+  margin-top: 1%;
+  padding: 10px;
+}
+
+.groups-side-bar > ul {
+  list-style: none;
+  font-weight: bold;
+}

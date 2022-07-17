@@ -15,12 +15,12 @@ const ChatFriendDisplay = ({
       </div>
       <div className="chat-friend-display-details">
         <span className="chat-friend-name">{friend.fullName}</span>
-        <span className="last-message">
+        {/*  <span className="last-message">
           {messageIsFile && <i>Attachment</i>}
           {!messageIsFile && (
             <p className="last-message-content">{lastMessage || "Hello"} </p>
           )}
-        </span>
+        </span> */}
       </div>
     </div>
   );

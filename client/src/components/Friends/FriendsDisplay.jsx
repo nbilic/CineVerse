@@ -28,7 +28,6 @@ const FriendsDisplay = () => {
       <h5>FRIENDS</h5>
       {!loading && (
         <>
-          {/* <input type="text" placeholder="Search Friends..." /> */}
           {!friends.length && <p>You have no friends</p>}
           <ul>
             {friends.map((friend) => (

@@ -1,12 +1,8 @@
 import useRouteToProfile from "../../hooks/useRouteToProfile";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const Friend = ({ friend }) => {
   const routeToProfile = useRouteToProfile(friend.handle);
-  const { friends: onlineFriends } = useSelector((state) => state.friends);
-
-  const checkIfOnline = () => onlineFriends.find((f) => friend._id === f._id);
   useEffect(() => {}, []);
   return (
     <li className="friend-li">
@@ -23,11 +19,6 @@ const Friend = ({ friend }) => {
           onClick={routeToProfile}
         >{`@${friend.handle}`}</p>
       </div>
-      {/* <div
-        className={`friend-status-block ${
-          checkIfOnline(friend._id) ? "friend-online" : "friend-offline"
-        }`} 
-      />*/}
     </li>
   );
 };

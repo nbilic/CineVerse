@@ -69,3 +69,40 @@
 .chat-action-icon:hover {
   color: var(--niceGreen);
 }
+.display-friends-button {
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .chat {
+    height: 80vh;
+  }
+
+  .chat-friend-display {
+    display: flex;
+    color: var(--primary);
+    margin-top: 5px;
+  }
+
+  .chat-friends-containers {
+    width: 0px;
+    visibility: hidden;
+  }
+
+  .chat-friend-name {
+    font-size: 1em;
+    width: 20px;
+    text-overflow: ellipsis;
+    border: 0px solid red;
+  }
+
+  .chat-friend-display-avatar {
+    height: 38px;
+    width: 38px;
+  }
+  .chat-messages {
+    height: 500px;
+    overflow-y: auto;
+  }
+}

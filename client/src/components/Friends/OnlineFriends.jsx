@@ -2,7 +2,6 @@ import "../../styles/friendsdisplay.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import api from "../../api/api";
-import { MdCircle } from "react-icons/md";
 import OnlineFriend from "./OnlineFriend";
 
 const OnlineFriends = () => {

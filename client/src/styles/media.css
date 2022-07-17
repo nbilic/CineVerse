@@ -1,0 +1,14 @@
+.media-container {
+  display: flex;
+  border: 0px solid red;
+  flex-wrap: wrap;
+
+  padding: 10px;
+}
+
+.media-image {
+  width: 350px;
+  height: 200px;
+  object-fit: cover;
+  margin: 1px;
+}

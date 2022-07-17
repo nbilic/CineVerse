@@ -187,3 +187,7 @@
 
 .inbox {
 }
+
+.chat-friend-display-avatar {
+  object-fit: cover;
+}

@@ -116,3 +116,18 @@
   cursor: pointer;
   color: rgb(68, 126, 145);
 }
+
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img {
+  height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .post-card {
+    margin-top: 2%;
+  }
+}
