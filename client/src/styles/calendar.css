@@ -40,7 +40,7 @@
 }
 
 .empty-day {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--primary);
 }
 
 .calendar-arrows {
@@ -59,6 +59,7 @@
 
 .movie-release {
   background-color: crimson;
+  color: white;
 }
 
 .today {
@@ -73,5 +74,9 @@
 @media only screen and (max-width: 980px) {
   .calendar-days {
     grid-template-columns: repeat(7, 25px);
+  }
+  .calendar {
+    margin-left: 0%;
+    background-color: white;
   }
 }

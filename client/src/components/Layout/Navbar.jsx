@@ -3,26 +3,23 @@ import logo from "../../images/logo-svg.svg";
 import { BsSearch } from "react-icons/bs";
 import useRouteToProfile from "../../hooks/useRouteToProfile";
 import { IoMdPerson, IoMdNotificationsOutline } from "react-icons/io";
-import { BiMessageDetail, BiNews, BiCog } from "react-icons/bi";
+import { BiArrowToLeft, BiArrowToRight } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
 import NavbarRoutes from "./NavbarRoutes";
+import NavbarDropdown from "./NavbarDropdown";
+import useToggle from "../../hooks/useToggle";
+import { TbLayoutSidebarRightExpand } from "react-icons/ti";
+import SidebarMobile from "../../pages/SidebarMobile";
+
 const Navbar = () => {
   const navigate = useNavigate();
+  const [routes, toggleRoutes] = useToggle(false);
+  const [details, toggleDetails] = useToggle(false);
   const { user } = useSelector((state) => state.user);
-  const routeToProfile = useRouteToProfile(user?.handle);
-  const logOut = async () => {
-    try {
-      await api.delete(`http://localhost:8080/auth/session`, {
-        withCredentials: true,
-      });
-      navigate(`/signin`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const routeToHome = () => {
     navigate("/");
   };
@@ -46,36 +43,33 @@ const Navbar = () => {
           </div>
 
           <div className="icons">
-            <ul>
-              <li onClick={() => navigate("/chat")}>
-                <BiMessageDetail className="shortcut-icons" />
-              </li>
-              <li>
-                {" "}
-                <IoMdNotificationsOutline className="shortcut-icons" />
-              </li>
-
-              <li>
-                {" "}
-                <FiSettings className="shortcut-icons" onClick={logOut} />
-              </li>
-              {/*    <li onClick={logOut}>
-          {" "}
-          <ImExit className="shortcut-icons logout-icon" /> Logout
-        </li> */}
-            </ul>
-            <img
-              src={user.avatar}
-              alt=""
-              className="avatar"
-              onClick={routeToProfile}
-            />
+            <div className="mobile-position-arrow">
+              <BiArrowToRight
+                onClick={() => {
+                  toggleRoutes();
+                  toggleDetails(false);
+                }}
+              />
+            </div>
+            <img src={user.avatar} alt="" className="avatar" />
+            <div className="mobile-position-arrow">
+              <BiArrowToLeft
+                onClick={() => {
+                  toggleRoutes(false);
+                  toggleDetails();
+                }}
+              />
+            </div>
           </div>
         </div>
       </nav>
-      <div className="mobile-position high-z">
-        <NavbarRoutes />
-      </div>
+      {
+        <div className={`high-z mobile-position `}>
+          <NavbarRoutes routes={routes} />
+
+          {<SidebarMobile details={details} />}
+        </div>
+      }
     </>
   );
 };

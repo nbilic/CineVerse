@@ -41,6 +41,9 @@ const FoundUsers = () => {
       <Navbar />
       <div className="center grid-item">
         <div className="posts-container special">
+          <div className="mobile-position-search">
+            <SearchUsers />
+          </div>
           <div className="test-cont">
             <div className="posts-container-homepage users-found">
               <h4>Users found: {users.length}</h4>

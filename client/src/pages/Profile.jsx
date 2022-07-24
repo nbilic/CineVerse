@@ -83,7 +83,7 @@ const Profile = () => {
         <div className="">
           {loading && (
             <div className="loader-container">
-              <RotateLoader color="lightblue" size={10} loading={loading} />
+              <RotateLoader size={10} loading={loading} />
             </div>
           )}
           {!loading && tab === ACTIVITY && (

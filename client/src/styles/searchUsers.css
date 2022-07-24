@@ -16,3 +16,17 @@
   color: var(--primary);
   outline: none;
 }
+
+@media only screen and (max-width: 980px) {
+  .search-users-div {
+    margin-left: 0%;
+    margin-top: 2%;
+  }
+
+  .sidebar-content {
+    display: none;
+  }
+
+  .mobile-position-search {
+  }
+}

@@ -1,5 +1,5 @@
 .profile {
-  background-color: var(--bgColor);
+  background-color: var(--secondary);
   min-height: 100vh;
   position: relative;
   border: 0px solid red;
@@ -156,7 +156,6 @@
     align-items: center;
     flex-wrap: wrap;
     font-size: 1;
-
     padding: 10px;
     transition: 0.2s ease-in;
     border-radius: 10px;

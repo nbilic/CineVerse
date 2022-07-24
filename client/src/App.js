@@ -25,6 +25,8 @@ import Groups from "./pages/Groups";
 
 import CreateNewGroupModal from "./pages/CreateNewGroupModal";
 import GroupDisplay from "./pages/GroupDisplay";
+import Settings from "./components/Layout/Settings";
+import SidebarMobile from "./pages/SidebarMobile";
 
 const App = () => {
   const { user } = useSelector((state) => state.user);
@@ -94,6 +96,8 @@ const App = () => {
           <Route path="/profile/:handle" element={<Profile />} />
           <Route path="/groups" element={<Groups />} />
           <Route path="/group" element={<GroupDisplay />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/calendar" element={<SidebarMobile />} />
           <Route path="/create-new-group" element={<CreateNewGroupModal />} />
         </Route>
       </Routes>

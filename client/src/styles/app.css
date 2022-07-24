@@ -2,10 +2,10 @@
 @import url("https://fonts.googleapis.com/css?family=Satisfy");
 
 :root {
-  --bgColor: #212c38;
-  --primary: #f0ede9;
-  --secondary: #2c3947;
-  --niceGreen: #30f5c8;
+  --bgColor: #f6f8fa;
+  --primary: #2c2c2c;
+  --secondary: #cdcdd4;
+  --niceGreen: #305ef5;
 }
 
 * {

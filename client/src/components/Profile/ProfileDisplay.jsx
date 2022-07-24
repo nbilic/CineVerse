@@ -1,13 +1,5 @@
 import "../../styles/profileDisplay.css";
-import { GoLocation, GoCalendar } from "react-icons/go";
-import { AiOutlineLink, AiOutlineMessage } from "react-icons/ai";
-import { CgNotes } from "react-icons/cg";
-import { FiBook } from "react-icons/fi";
-import { IoStatsChart } from "react-icons/io5";
-import { FaUserFriends } from "react-icons/fa";
-import { HiUserGroup } from "react-icons/hi";
-import { BiMoviePlay } from "react-icons/bi";
-import { ImImages } from "react-icons/im";
+import { AiOutlineMessage } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useManageFriends from "../../hooks/useManageFriends";
@@ -18,16 +10,8 @@ import EditProfileModal from "./EditProfileModal";
 import FriendsInCommon from "./FriendsInCommon";
 import ImageModal from "../Modals/ImageModal";
 import ProfileTabs from "./ProfileTabs";
-
-const [ACTIVITY, ABOUTME, FRIENDS, GROUPS, MOVIES, MEDIA, STATS] = [
-  "ACTIVITY",
-  "ABOUTME",
-  "FRIENDS",
-  "GROUPS",
-  "MOVIES",
-  "MEDIA",
-  "STATS",
-];
+import { FiSettings } from "react-icons/fi";
+import Settings from "../Layout/Settings";
 
 const ProfileDisplay = ({ profile, setTab, tab }) => {
   const { user } = useSelector((state) => state.user);
@@ -38,6 +22,7 @@ const ProfileDisplay = ({ profile, setTab, tab }) => {
   const [value, setValue] = useToggle(false);
   const [edit, toggleEdit] = useToggle(false);
   const [imageModal, toggleImageModal] = useToggle(false);
+  const [settings, toggleSettings] = useToggle(false);
   const [displayCommonFriends, toggleDisplayCommonFriends] = useToggle(false);
   const [confirmActionText, setConfirmActionText] = useState("");
   const manageFriends = useManageFriends();
@@ -95,6 +80,7 @@ const ProfileDisplay = ({ profile, setTab, tab }) => {
           img={imageModalContent}
         />
       )}
+      {settings && <Settings display={settings} setDisplay={toggleSettings} />}
       {displayCommonFriends && (
         <FriendsInCommon
           friends={commonFriends}
@@ -143,10 +129,8 @@ const ProfileDisplay = ({ profile, setTab, tab }) => {
             <ProfileTabs setTab={setTab} tab={tab} />
           </div>
           <div className="user-interactions">
-            {friendsWithUser && (
-              <AiOutlineMessage className="send-message-icon" />
-            )}
-            <button
+            <div
+              className="user-action-button"
               onClick={
                 buttonText === ADD || buttonText === EDIT
                   ? handleAction
@@ -154,7 +138,10 @@ const ProfileDisplay = ({ profile, setTab, tab }) => {
               }
             >
               {buttonText}
-            </button>
+            </div>
+            {buttonText === EDIT && (
+              <FiSettings onClick={toggleSettings} className="settings-icon" />
+            )}
           </div>
         </div>
       </div>

@@ -56,12 +56,7 @@ const Homepage = () => {
               <div className="posts-container-homepage">
                 {loading && (
                   <div className="loader-container">
-                    <RotateLoader
-                      color="lightblue"
-                      size={10}
-                      loading={loading}
-                      margin="2"
-                    />
+                    <RotateLoader size={10} loading={loading} margin="2" />
                   </div>
                 )}
                 {posts?.map((post) => (

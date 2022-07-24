@@ -92,4 +92,9 @@
   .grid-item-1 {
     font-size: 0.8em;
   }
+
+  .friends-display,
+  .online-friends-display {
+    margin-left: 0%;
+  }
 }

@@ -64,19 +64,15 @@
 .send-message-icon:hover {
   cursor: pointer;
 }
-.profile-cross-section button {
-  height: 38px;
-  width: 100px; /* 
-    margin-top: calc(var(--profile-avatar-width)/2 * -1); */
-
+.user-action-button {
   background-color: rgb(28, 174, 241);
   color: rgb(255, 255, 255);
   border: none;
   font-weight: bold;
   text-transform: uppercase;
-  border-radius: 20px;
-  font-size: 0.8em;
+  font-size: 1.5em;
   transition: 0.2s ease;
+  padding: 5px;
 }
 
 .profile-cross-section button:hover {
@@ -174,4 +170,25 @@
 .profile-posts-container {
   width: 50%;
   margin: auto;
+}
+
+.user-interactions {
+  display: flex;
+  align-items: center;
+}
+
+.settings-icon {
+  margin-left: 15px;
+  font-size: 1.5em;
+}
+
+@media only screen and (max-width: 700px) {
+  .settings-icon {
+    margin-left: 15px;
+    font-size: 1.2em;
+  }
+
+  .user-action-button {
+    font-size: 1em;
+  }
 }
